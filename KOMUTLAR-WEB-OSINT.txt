@@ -1,0 +1,29 @@
+**🌐 WEB OSINT BOTU — KOMUT REHBERİ**
+*(Siteler ve IP'ler hakkında bilgi toplar)*
+
+➤ **/ip-gecmis** → IP'nin kayıt geçmişi ve konumu
+➤ **/bgp-tara** → Ağın (ASN) rotaları ve komşuları
+➤ **/ping-tarama** → Hedefin portlarını açık/kapali kontrol et
+➤ **/traceroute-sim** → Hedefe giden yoldaki duraklar
+➤ **/cdn-harita** → Site hangi hızlandırıcıyı kullanıyor
+➤ **/websiteleri-ortak** → İki sitenin ortak bağlantıları
+➤ **/subdomain-takeover** → Alt alan adı ele geçirilebilir mi
+➤ **/firebase-ara** → Firebase veritabanı açık mı
+➤ **/jwt-coz** → JWT token'ının içindekileri göster
+➤ **/http-gecmis** → Sitenin geçmiş HTTP yanıtları
+➤ **/url-tara** → Link güvenli mi analiz et
+➤ **/censys-sorgu** → IP/Domain'in tüm kayıtları
+➤ **/s3-tara** → Açık bulut depolama (S3) ara
+➤ **/github-dork** → GitHub'da API anahtarı, şifre ara
+➤ **/cryptoscan** → SSL/TLS şifreleme zafiyeti tara
+➤ **/dork-avla** → Hedefe özel Google sorgusu üret
+➤ **/waf-as** → Site güvenlik duvarını analiz et
+➤ **/email-sorgula** → E-posta sızıntılarda var mı
+➤ **/sifre-sorgula** → Şifren sızıntıda görünmüş mü
+➤ **/breach-scanner** → Domaini sızıntılarda tara
+➤ **/pastebin-ara** → Pastebin/Gist'te kelime ara
+➤ **/whois-detay** → Domain kime ait, DNS kayıtları
+➤ **/web-arsiv** → Sitenin eski hallerini göster
+➤ **/sertifika-transparan** → Sitenin tüm alt alanlarını bul
+➤ **/asn-tarama** → ASN'nin IP bloklarını göster
+➤ **/cdn-gercek-ip** → CDN arkasındaki gerçek IP'yi bul

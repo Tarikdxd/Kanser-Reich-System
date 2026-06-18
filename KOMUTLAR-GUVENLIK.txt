@@ -1,0 +1,17 @@
+**🔒 GÜVENLİK BOTU — KOMUT REHBERİ**
+*(Sitelerin güvenlik açıklarını test eder)*
+
+➤ **/email-spoof** → Site taklit edilebilir mi (SPF/DKIM/DMARC)
+➤ **/waf-test** → SQL/XSS saldırılarına karşı korunuyor mu
+➤ **/header-guvenlik** → Güvenlik başlıkları var mı (HSTS, CSP)
+➤ **/wp-scan** → WordPress sitesinde güvenlik açığı tara
+➤ **/ssl-coz** → SSL sertifika ve TLS sürümü analizi
+➤ **/tech-stack** → Site hangi teknolojileri kullanıyor
+➤ **/port-hizli** → IP'nin en kritik 10 portunu kontrol et
+➤ **/cdn-coz** → CDN arkasındaki gerçek IP'yi bul
+➤ **/xss-tara** → XSS güvenlik açığı test et
+➤ **/clickjack-test** → Çerçeve içinde gösterilmeye karşı korunuyor mu
+➤ **/cors-test** → Başka sitelerden izinsiz erişilebilir mi
+➤ **/open-redirect** → Yönlendirme açığı var mı
+➤ **/jwt-kir** → JWT token şifresini kırmaya çalış
+➤ **/sql-injection-test** → SQL açığı var mı test et

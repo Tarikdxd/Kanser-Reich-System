@@ -1,0 +1,15 @@
+**📱 SOSYAL MEDYA OSINT BOTU — KOMUT REHBERİ**
+*(Sosyal medya profilleri hakkında bilgi toplar)*
+
+➤ **/dox-detay** → Kullanıcı adıyla GitHub+sızıntı+medya profili çıkar
+➤ **/insan-ara** → İsim soyisme göre Instagram, Twitter, GitHub, LinkedIn'de ara
+➤ **/telegram-sorgula** → Telegram kullanıcı adı var mı kontrol et
+➤ **/insta-hikaye** → Instagram profil ve hikayelerini sorgula
+➤ **/tiktok-profil** → TikTok profil detaylarını getir
+➤ **/reddit-profil** → Reddit profil analizi (post, yorum, karma)
+➤ **/telegram-kanal** → Telegram kanal analizi (üye, aktivite)
+➤ **/steam-istihbarat** → Steam oyun profili bilgileri
+➤ **/sarki-profil** → Last.fm/Spotify müzik zevki analizi
+➤ **/sosyal-derin** → Kullanıcı adını 40+ platformda tara
+➤ **/telegram-grup** → Telegram grup üye analizi
+➤ **/cats-tara** → Eski forum/oyun sitelerinde kullanıcı adını ara

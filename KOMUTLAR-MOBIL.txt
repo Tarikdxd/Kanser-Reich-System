@@ -1,0 +1,17 @@
+**📱 MOBİL OSINT BOTU — KOMUT REHBERİ**
+*(Telefon ve uygulama bilgileri)*
+
+➤ **/telefon-sorgula** → Numaranın ülke, operatör, geçerliliği
+➤ **/imei-coz** → IMEI'den cihaz marka/model tespiti
+➤ **/cihaz-detay** → Model adından cihaz/işletim sistemi bilgisi
+➤ **/apk-incele** → APK izinleri ve içeriğini analiz et
+➤ **/apk-tehlikeli** → APK'yı virüs taramasından geçir
+➤ **/apk-gizli** → APK içinde gizli anahtar/şifre ara
+➤ **/play-store** → Google Play'de uygulama ara
+➤ **/app-store** → App Store'da uygulama ara
+➤ **/mobil-operator-detay** → Operatör/MVNO/VoIP tespiti
+➤ **/mobil-ulke** → Telefon kodundan ülke tespiti
+➤ **/whatsapp-profil** → WhatsApp profil bilgisi sorgula
+➤ **/mobil-izler** → Uygulama izinlerini analiz et
+➤ **/gsmarena** → Cihaz teknik özelliklerini getir
+➤ **/mobil-cve** → Cihazdaki güvenlik açıklarını listele

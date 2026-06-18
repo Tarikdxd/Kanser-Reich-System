@@ -1,0 +1,11 @@
+**🌑 DERİN WEB BOTU — KOMUT REHBERİ**
+*(Dark web/gizli ağlarda arama yapar)*
+
+➤ **/darkweb-arama** → .onion sitelerinde kelime ara
+➤ **/tor-sorgu** → .onion adresi çalışıyor mu kontrol et
+➤ **/tor-istatistik** → Tor ağı istatistikleri (node, ülke)
+➤ **/i2p-tara** → I2P gizli ağında site tara
+➤ **/breach-forum** → Sızıntı forum/paste sitelerinde ara
+➤ **/ransom-not** → Fidye yazılım gruplarının sitelerini tara
+➤ **/deep-web-scan** → Deep web'de kapsamlı tarama
+➤ **/darkweb-gelismis** → Forum+pazar+sızıntı gelişmiş tarama

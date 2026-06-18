@@ -1,0 +1,5 @@
+**📰 HABER BOTU — KOMUT REHBERİ**
+
+➤ **/haber** → Yazdığın metni özel tasarımlı haber görseline çevirir
+ve haber kanalına atar, altına yorum başlığı açar.
+(Maksimum 120 karakter)

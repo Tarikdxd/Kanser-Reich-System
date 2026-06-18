@@ -1,0 +1,8 @@
+{
+  "c2_host": "127.0.0.1",
+  "c2_port": 6666,
+  "password": "kansernet2026",
+  "max_bots": 5000,
+  "ddos_methods": ["HTTP", "HTTPS", "UDP", "TCP", "Slowloris", "DNS"],
+  "spread_methods": ["USB", "LAN", "Discord", "Startup"]
+}

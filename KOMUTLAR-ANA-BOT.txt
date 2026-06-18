@@ -1,0 +1,53 @@
+**🤖 ANA BOT — KOMUT REHBERİ**
+
+➤/fotoyu-anlat → Fotoğrafı AI anlatsın
+➤/ses-coz → Sesi yazıya çevir
+➤/kombin-yap → İki tarifi birleştir resim yaptır
+➤/link-kisalt → Uzun linki kısalt
+➤/sil → Toplu mesaj sil
+➤/wiki → Wikipedia özeti
+➤/sor → AI'a soru sor
+➤/ceviri → Metni çevir
+➤/etiket-ekle → Metin kaydet
+➤/etiket → Kaydı çağır
+➤/sifre-uret → Şifre üret
+➤/ozetle → Metni özetle
+➤/not-paylas → Yazıyı link yap
+➤/resim-ciz → AI resim çizsin
+➤/seslendir → Yazıyı ses yap
+➤/sesli-ceviri → Çevir + seslendir
+➤/mock-api → Sahte JSON linki
+➤/guvenli-link → Linki güvenli aç
+➤/kod-analiz → Kodu analiz et
+➤/ip-sorgula → IP tehlikeli mi
+➤/domain-sorgula → Site güvenli mi
+➤/hedef-kesif → Alt site bul
+➤/veri-sizintisi → E-posta sızmış mı
+➤/dns-sorgu → DNS kayıtları
+➤/kullanici-avla → 50+ sitede ara
+➤/delil-kaydet → Sayfayı arşivle
+➤/dork-uret → Google sorgusu üret
+➤/domain-istihbarat → Site kime ait
+➤/personel-bul → Şirket e-postaları
+➤/id-sorgula → Discord ID analizi
+➤/kim-bu → Çapraz kimlik tespiti
+➤/ayak-izi → İnternet izini bul
+➤/dev-tara → GitHub sızıntı ara
+➤/ag-takip → IP ağ bilgileri
+➤/iz-sur → AI profilleme
+➤/api-test → HTTP test isteği
+➤/sql-yaz → Yazıyı SQL'e çevir
+➤/derin-tarama → Site + sızıntı tara
+➤/saldirgan-avi → IP kara listede mi
+➤/hizmet-analiz → Açık port bul
+➤/sosyal-graf → Şirket haritas
+➤/zararli-analiz → Antivirüste tara
+➤/shodan-tam → Tüm açıkları göster
+➤/dev-istihbarat → GitHub derin analiz
+➤/exploit-ara → CVE kodu ara
+➤/sifre-kir → Hash çözmeye çalış
+➤/kara-liste → Kara liste sorgula
+➤/pdf-zararli → Fingerprint HTML'si
+➤/ip-pool-test → Proxy/VPN test
+➤/dijital-iz → Her yerde iz sür
+➤/email-synt → E-posta tahmin et

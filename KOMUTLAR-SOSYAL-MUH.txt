@@ -1,0 +1,16 @@
+**🎭 SOSYAL MÜHENDİSLİK BOTU — KOMUT REHBERİ**
+*(Farkındalık eğitim araçları — sadece eğitim amaçlı)*
+
+➤ **/link-mask** → Linki farklı formatta göster (Markdown/HTML)
+➤ **/fake-login** → Sahte giriş sayfası linki üret
+➤ **/qr-phish** → QR kodlu log tutan link oluştur
+➤ **/oltala** → Log tutan sahte link üret
+➤ **/deep-voice** → 5 saniyelik sesten AI ses klonlama
+➤ **/otp-bypass** → Tek kullanımlık şifre açığını test et
+➤ **/call-spoof** → Arayan kimliği gizleme simülasyonu
+➤ **/vishing-senaryo** → Sesli phishing senaryosu oluştur
+➤ **/credential-stuff** → Sızmış şifrelerle giriş denemesi
+➤ **/gorsel-osint** → Fotoğrafın hangi sitelerde olduğunu bul
+➤ **/email-derin** → E-posta derin analizi (sızıntı, PGP)
+➤ **/sifre-tahmin** → Kişisel bilgilerden şifre tahmin et
+➤ **/hash-coz** → Hash'i çözmeye çalış

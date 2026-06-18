@@ -1,0 +1,21 @@
+# KANSER TOOLS — Required Packages
+# pip install -r requirements.txt
+cryptography
+requests
+pillow
+
+# Optional — keylogger functionality
+pynput
+
+# Optional — screen capture
+pyautogui
+
+# Optional — webcam support (40MB download)
+opencv-python
+numpy
+
+# Optional — microphone (requires Visual C++ Build Tools)
+# pyaudio
+
+# Build — install when ready to compile EXEs
+# pyinstaller

@@ -1,0 +1,1069 @@
+======================================================================
+  KANSER ISTIHBARAT (ANA BOT) - /
+======================================================================
+
+/dev-tara <kullanici>
+  Kullanim/Test: /dev-tara kullanici:torvalds — Bot, GitHub API uzerinden kullanicinin son 5 reposunu tarayip .env, config.json gibi hassas dosyalari arar.
+  Ne ise yarar: GitHub kullanicisinin public repolarinda sizinti/credentials taramasi yapar.
+
+/ag-takip <ip>
+  Kullanim/Test: /ag-takip ip:8.8.8.8 — Google DNS'in lokasyon, ISP, ASN bilgilerini ve AbuseIPDB skorunu getirir.
+  Ne ise yarar: Bir IP adresinin lokasyon, ISP, organizasyon ve saldirganlik skorunu sorgular.
+
+/iz-sur <hedef>
+  Kullanim/Test: /iz-sur hedef:torvalds — GitHub kullanicisinin son 30 etkinligini analiz edip AI ile davranis profili cikarir.
+  Ne ise yarar: GitHub kullanicisinin etkinlik verilerinden AI ile calisma saatleri ve davranis profili analizi yapar.
+
+/wiki <terim>
+  Kullanim/Test: /wiki terim:Istanbul — Turkce Wikipedia'dan o terim hakkinda ozet bilgi getirir.
+  Ne ise yarar: Turkce Wikipedia'da terim arar ve ozet bilgiyi dondurur.
+
+/sifre-uret <uzunluk>
+  Kullanim/Test: /sifre-uret uzunluk:16 — 16 karakter uzunlugunda rastgele guvenli bir sifre uretir.
+  Ne ise yarar: Belirtilen uzunlukta (6-32) guvenli rastgele sifre uretir.
+
+/etiket-ekle <isim> <icerik>
+  Kullanim/Test: /etiket-ekle isim:onemli-not icerik:Toplanti 15:00'da — Cloudflare KV'ye etiket olarak metin kaydeder.
+  Ne ise yarar: Bulut KV veritabanina anahtar-deger seklinde etiket kaydeder.
+
+/etiket <isim>
+  Kullanim/Test: /etiket isim:onemli-not — Daha once kaydedilmis etiketi KV'den okuyup gosterir.
+  Ne ise yarar: KV veritabanindan kaydedilmis etiketi getirir.
+
+/not-paylas <metin>
+  Kullanim/Test: /not-paylas metin:Bu bir gizli mesajdir — Metni KV'ye not olarak kaydeder ve paylasim linki verir.
+  Ne ise yarar: Metni buluta kaydedip paylasilabilir bir link olusturur.
+
+/link-kisalt <link>
+  Kullanim/Test: /link-kisalt link:https://www.example.com/cok-uzun-bir-link-yolu — Kisa link olusturup dondurur.
+  Ne ise yarar: Uzun URL'leri KV uzerinden kisa linke donusturur.
+
+/sil <miktar>
+  Kullanim/Test: /sil miktar:20 — Kanalda son 20 mesaji toplu olarak siler (14 gunden yeni olanlari).
+  Ne ise yarar: Kanalda toplu mesaj silme islemi yapar (Yonetici yetkisi gerekir).
+
+/fotoyu-anlat <gorsel>
+  Kullanim/Test: /fotoyu-anlat — Bir fotograf yukleyip komutu calistirin. AI fotografta ne gordugunu 1-2 cumleyle aciklar.
+  Ne ise yarar: Yuklenen fotografi AI (Llama Vision) ile analiz edip icerigini aciklar.
+
+/ses-coz <dosya>
+  Kullanim/Test: /ses-coz — Bir ses dosyasi (.mp3, .wav) yukleyip komutu calistirin. Whisper AI sesi metne cevirir.
+  Ne ise yarar: Ses dosyasindaki konusmayi Whisper AI ile yaziya cevirir.
+
+/sor <mesaj>
+  Kullanim/Test: /sor mesaj:Python'da liste nasil siralanir? — AI'a serbest formatta soru sorar, cevap alirsiniz.
+  Ne ise yarar: Llama AI'a herhangi bir konuda soru sorup cevap alir.
+
+/ozetle <metin>
+  Kullanim/Test: /ozetle metin:Uzun bir makale metni... — Girilen uzun metni AI madde madde ozetler.
+  Ne ise yarar: Uzun metinleri AI ile kisa maddeler halinde ozetler.
+
+/ceviri <dil> <metin>
+  Kullanim/Test: /ceviri dil:Ingilizce metin:Merhaba dunya, bugun hava cok guzel — Metni hedef dile AI ile cevirir.
+  Ne ise yarar: Girilen metni belirtilen dile AI (Llama) ile cevirir.
+
+/resim-ciz <hayaliniz>
+  Kullanim/Test: /resim-ciz hayaliniz:Izmir Saat Kulesi yaninda bir kedi — Stable Diffusion ile yapay zeka gorseli uretir.
+  Ne ise yarar: Stable Diffusion AI ile metinden goruntu uretir.
+
+/kombin-yap <ana_tarif> <stil_eklentisi>
+  Kullanim/Test: /kombin-yap ana_tarif:bir samuray stl_eklentisi:cyberpunk tarzinda — Tarif + stil ile AI gorseli uretir.
+  Ne ise yarar: Iki promptu birlestirerek (ana fikir + stil) AI gorseli olusturur.
+
+/seslendir <metin>
+  Kullanim/Test: /seslendir metin:Merhaba, bugun hava cok guzel — Metni TTS motoruyla seslendirip .wav olarak gonderir.
+  Ne ise yarar: Metni yapay zeka TTS (MeloTTS) ile seslendirip ses dosyasi dondurur.
+
+/sesli-ceviri <metin> <dil>
+  Kullanim/Test: /sesli-ceviri metin:Hello world, today is beautiful dil:Turkce — Metni cevirip seslendirir.
+  Ne ise yarar: Once ceviri yapar, sonra ceviriyi seslendirerek ses dosyasi olarak dondurur.
+
+/mock-api <talimat>
+  Kullanim/Test: /mock-api talimat:10 kullanicili bir JSON — AI'in urettigi JSON verisini API endpoint'i olarak yayinlar.
+  Ne ise yarar: AI ile ornek JSON API endpoint'i olusturup paylasilabilir link verir.
+
+/guvenli-link <link>
+  Kullanim/Test: /guvenli-link link:https://example.com — Sayfanin ekran goruntusunu alip HTTP basliklarini analiz eder.
+  Ne ise yarar: Bir URL'in ekran goruntusunu alir ve HTTP header analizini yapar.
+
+/delil-kaydet <link>
+  Kullanim/Test: /delil-kaydet link:https://example.com — Sayfanin ekran goruntusu + HTML kaynagini arsivler.
+  Ne ise yarar: Web sayfasini ekran goruntusu ve kaynak koduyla birlikte arsivler.
+
+/kod-analiz <kod>
+  Kullanim/Test: /kod-analiz kod:<?php eval($_GET['cmd']); ?> — Girilen kodu malware analisti gibi AI inceletir.
+  Ne ise yarar: Yazilim kodunu AI ile analiz edip ne yaptigini aciklar (malware analizi).
+
+/ip-sorgula <ip>
+  Kullanim/Test: /ip-sorgula ip:8.8.8.8 — VirusTotal + AlienVault OTX + ip-api ile kapsamli IP analizi yapar.
+  Ne ise yarar: IP adresini VirusTotal, AlienVault OTX ve ip-api ile kapsamli analiz eder.
+
+/domain-sorgula <domain>
+  Kullanim/Test: /domain-sorgula domain:example.com — Domain'in VirusTotal skoru, OTX pulse verisi ve DNS cozumlemesini yapar.
+  Ne ise yarar: Domain adini VirusTotal, OTX ve DNS cozumuyle kapsamli analiz eder.
+
+/hedef-kesif <domain>
+  Kullanim/Test: /hedef-kesif domain:example.com — crt.sh uzerinden domain'e ait SSL sertifikasi gecmisini ve alt alanlari listeler.
+  Ne ise yarar: crt.sh uzerinden domain'in alt alan adlarini kesfeder (ilk 20).
+
+/veri-sizintisi <hedef> (alias: /ayak-izi)
+  Kullanim/Test: /veri-sizintisi hedef:ornek@email.com — HIBP + psbdmp.cc ile e-posta/domen sizinti taramasi yapar.
+  Ne ise yarar: HIBP ve Pastebin'de hedefin sizinti veritabanlarinda olup olmadigini kontrol eder.
+
+/dns-sorgu <domain> [tur]
+  Kullanim/Test: /dns-sorgu domain:example.com tur:A — Domain'in DNS kayitlarini (A, MX, TXT vb.) sorgular.
+  Ne ise yarar: Cloudflare DNS resolver ile domain DNS kayitlarini sorgular.
+
+/exif-bak <fotograf>
+  Kullanim/Test: /exif-bak — Bir fotograf yukleyin. AI fotograftan cihaz tipi, cekim zamani, konum tahmini yapar.
+  Ne ise yarar: Fotograftaki EXIF/metadata bilgilerini AI ile tahmin eder.
+
+/kullanici-avla <kullanici> (alias: /kim-bu)
+  Kullanim/Test: /kullanici-avla kullanici:techguru — 35+ platformda (GitHub, Twitter, Instagram vb.) kullanici adini tarar.
+  Ne ise yarar: 35+ sosyal platformda kullanici adinin varligini tarar ve profil linklerini listeler.
+
+/dork-uret <domain> <tur>
+  Kullanim/Test: /dork-uret domain:example.com tur:pdf — Domain ve dosya turu icin Google dork sorgulari olusturur.
+  Ne ise yarar: Google dork (gelişmiş arama) sorgulari olusturup linkleriyle birlikte sunar.
+
+/domain-istihbarat <domain>
+  Kullanim/Test: /domain-istihbarat domain:example.com — RDAP API uzerinden domain tescil tarihi ve kayitci bilgisini getirir.
+  Ne ise yarar: RDAP API ile domain'in tescil tarihi, registrar ve handle bilgisini sorgular.
+
+/personel-bul <domain>
+  Kullanim/Test: /personel-bul domain:example.com — Hunter.io + pattern tahmini ile domain'e ait e-posta adreslerini cikarir.
+  Ne ise yarar: Domain'deki muhtemel kurumsal e-posta adreslerini Hunter.io ve pattern tahminiyle bulur.
+
+/id-sorgula <id>
+  Kullanim/Test: /id-sorgula id:123456789012345678 — Discord Snowflake ID'sini cozer; hesap yasini, kullanici bilgilerini, avatar, banner, rozetleri listeler.
+  Ne ise yarar: Discord kullanici ID'sinden kapsamli profil bilgisi (avatar, rozet, Nitro, sunucu detaylari) cikarir.
+
+/kara-liste <hedef>
+  Kullanim/Test: /kara-liste hedef:1.2.3.4 — IP veya domain'i Spamhaus, Spamcop, SORBS gibi kara liste servislerinde kontrol eder.
+  Ne ise yarar: IP/domain'in bilinen kara liste servislerinde (Spamhaus, Spamcop vb.) kayitli olup olmadigini sorgular.
+
+/sunucu-dusur <hedef> [sure]
+  Kullanim/Test: /sunucu-dusur hedef:example.com sure:5 — 5 saniye boyunca hedefe HTTP GET stres testi yapar.
+  Ne ise yarar: Hedef sunucuya belirtilen sure boyunca HTTP GET stres testi uygular.
+
+/pdf-zararli <isim> [log_hedefi]
+  Kullanim/Test: /pdf-zararli isim:rapor.pdf log_hedefi:webhook-url — Phishing HTML dosyasi olusturur; acan kisinin bilgilerini loglar.
+  Ne ise yarar: Bilgi toplayan phishing HTML dosyasi olusturur (loglama ozellikli).
+
+/alt-alan <domain>
+  Kullanim/Test: /alt-alan domain:example.com — crt.sh uzerinden domain'in alt alan adlarini listeler.
+  Ne ise yarar: crt.sh sertifika kayitlarindan domain'in alt alan adlarini cikarir.
+
+/gecmis-dns <domain>
+  Kullanim/Test: /gecmis-dns domain:example.com — HackerTarget API ile domain'in DNS gecmisini sorgular.
+  Ne ise yarar: HackerTarget API uzerinden domain'in gecmis DNS kayitlarini ve WAF atlama ipuclarini getirir.
+
+/exploit-ara <cve>
+  Kullanim/Test: /exploit-ara cve:CVE-2021-44228 — GitHub'da CVE numarasiyla ilgili exploit/PoC repolari arar.
+  Ne ise yarar: GitHub'da CVE ile ilgili exploit/PoC repolari arar (yildiz sirasina gore).
+
+/sifre-kir <hash>
+  Kullanim/Test: /sifre-kir hash:5d41402abc4b2a76b9719d911017c592 — MD5Decrypt API ile hash cozer.
+  Ne ise yarar: MD5/SHA1/SHA256/SHA384/SHA512 hash degerini API uzerinden cozmeye calisir (MD5Decrypt API gerekir).
+
+/socmed-engelle <kullanici>
+  Kullanim/Test: /socmed-engelle kullanici:johnsmith — 40 platformda kullanici adi varligini es zamanli tarar.
+  Ne ise yarar: 40 sosyal medya ve gelistirici platformunda kullanici adi taramasi yapar.
+
+/ip-pool-test <ip>
+  Kullanim/Test: /ip-pool-test ip:45.33.32.156 — IP'nin proxy/VPN/hosting olup olmadigini, AbuseIPDB skorunu test eder.
+  Ne ise yarar: IP adresinin proxy/VPN/hosting olup olmadigini ve saldirganlik skorunu kontrol eder.
+
+/dijital-iz <kullanici>
+  Kullanim/Test: /dijital-iz kullanici:johndoe — GitHub profilini, HIBP sizintilarini ve Pastebin kayitlarini tek seferde tarar.
+  Ne ise yarar: Kullanicinin GitHub, HIBP ve Pastebin'deki dijital ayak izlerini toplu sorgular.
+
+/email-synt <domain> [isim]
+  Kullanim/Test: /email-synt domain:example.com isim:Ahmet Yilmaz — Domain ve isimden olasi kurumsal e-posta adreslerini tahmin eder.
+  Ne ise yarar: Isim + domain kombinasyonundan olasi e-posta adresi formatlarini tahmin eder.
+
+/sunucu-istatistik
+  Kullanim/Test: /sunucu-istatistik — Discord sunucusunun uye sayisi, boost seviyesi, aktif kullanici istatistiklerini gosterir.
+  Ne ise yarar: Discord sunucusunun anlik uye, aktiflik, boost ve sahip bilgilerini gosterir.
+
+/oto-moderasyon [islem]
+  Kullanim/Test: /oto-moderasyon islem:durum — Sunucudaki AutoMod kurallarini listeler. islem:ekle ile yeni spam kurali ekler.
+  Ne ise yarar: Discord AutoMod kurallarini listeleme, ekleme, silme islemlerini yapar.
+
+/gelismis-id <id>
+  Kullanim/Test: /gelismis-id id:123456789012345678 — Discord ID'sinden hesap olusturma tarihi, avatar, banner, Nitro bilgisi cikarir.
+  Ne ise yarar: Discord kullanici ID'sinden profil detaylarini (avatar, Nitro, yas) cikarir.
+
+/layer7 <hedef> [sure]
+  Kullanim/Test: /layer7 hedef:example.com sure:5 — Hedefe 5 saniye boyunca 10'lu paralel HTTP GET istekleri yapar.
+  Ne ise yarar: Layer 7 seviyesinde HTTP GET stres testi uygular.
+
+/slowloris <hedef> [sure]
+  Kullanim/Test: /slowloris hedef:example.com sure:10 — Baglantilari yavas acik tutarak sunucu kaynaklarini tuketmeye calisir.
+  Ne ise yarar: Slowloris tipi yavas baglanti stres testi uygular.
+
+/http-flood <hedef> [sure] [metod]
+  Kullanim/Test: /http-flood hedef:example.com sure:5 metod:POST — 25'li paralel HTTP istekleri ile hedefe yuksek hacimli istek gonderir.
+  Ne ise yarar: Yuksek hacimli HTTP istekleri (GET/POST) ile stres testi uygular.
+
+/dns-flood <domain> [sure]
+  Kullanim/Test: /dns-flood domain:example.com sure:5 — Hedef domain icin Cloudflare DNS'e surekli A kaydi sorgusu gonderir.
+  Ne ise yarar: DNS cozumleyici uzerinden domain'e surekli DNS sorgusu gondererek test yapar.
+
+/api-crash <url>
+  Kullanim/Test: /api-crash url:https://example.com/api — SQLi, XSS, Path Traversal payloadlariyla API guvenlik testi yapar.
+  Ne ise yarar: API endpoint'ine SQLi/XSS/Path Traversal payloadlari gonderip guvenlik kontrolu yapar.
+
+/brute-force <url> [kullanici] [k_ad] [s_ad]
+  Kullanim/Test: /brute-force url:https://example.com/login kullanici:admin — 10 yaygin sifreyle login formuna brute force dener.
+  Ne ise yarar: Login formuna yaygin sifrelerle temel brute force denemesi yapar.
+
+/dizin-tara <url>
+  Kullanim/Test: /dizin-tara url:https://example.com — admin, .env, .git gibi yaygin dizinleri tarar, acik olanlari listeler.
+  Ne ise yarar: Web sunucusunda yaygin dizinlerin acik olup olmadigini tarar.
+
+/kullanici-gecmis <kullanici>
+  Kullanim/Test: /kullanici-gecmis kullanici:johnsmith — 12 platformda profil varligi + Wayback Machine arsiv kontrolu yapar.
+  Ne ise yarar: 12 platformda profil varligini ve Wayback Machine arsiv kaydini kontrol eder.
+
+/tehdit-model <domain>
+  Kullanim/Test: /tehdit-model domain:example.com — DNS, SSL sertifika, HTTP header, RDAP verilerini toplayip AI ile tehdit modeli raporu cikarir.
+  Ne ise yarar: Domain'in teknik verilerini toplayip AI ile otomatik tehdit modeli raporu olusturur.
+
+/kanser-sorgu <tip> [tckn] [gsm] [ad] [soyad] [il] [ilce]
+  Kullanim/Test: /kanser-sorgu tip:tcsorgu tckn:12345678901 — Belsis.art API ile TC kimlik, GSM, adres, tapu, aile, sokak sorgulari yapar. Sonucu DM ile gonderir.
+  Ne ise yarar: Belsis.art API uzerinden TC kimlik, GSM, adres, tapu, aile sorgulari yapip DM olarak gonderir.
+
+/sql-tara <url> [param] [mod]
+  Kullanim/Test: /sql-tara url:https://example.com/page.php?id=1 param:id mod:hizli — SQL Injection taramasi yapar; mod:tam daha kapsamli.
+  Ne ise yarar: SQL Injection zafiyetlerini union, error, blind, time-based payloadlarla tarar.
+
+/xss-tara <url> [param]
+  Kullanim/Test: /xss-tara url:https://example.com/search param:q — 10 farkli XSS payload'u ile Reflected XSS taramasi yapar.
+  Ne ise yarar: 10 farkli XSS payloadu (script, img, svg vb.) ile Reflected XSS taramasi yapar.
+
+/config-avla <domain>
+  Kullanim/Test: /config-avla domain:example.com — .env, .git/config, wp-config.php, backup.sql gibi 25+ hassas dosyayi tarar.
+  Ne ise yarar: Domain'de .env, config, backup, SQL dump gibi 25+ hassas dosyanin acik olup olmadigini tarar.
+
+/reverse-shell <ip> [port]
+  Kullanim/Test: /reverse-shell ip:192.168.1.10 port:4444 — Bash, Python, PHP, PowerShell, Netcat icin reverse shell komutlari olusturur.
+  Ne ise yarar: Verilen IP ve port icin 7 farkli dilde reverse shell komutu olusturur.
+
+/waf-atlat <url>
+  Kullanim/Test: /waf-atlat url:https://example.com — WAF tespit edip (Cloudflare/ModSecurity/Akamai) bypass payloadlari onerir.
+  Ne ise yarar: WAF sistemini tespit eder ve o WAF icin bypass payloadlari listeler.
+
+/auto-pwn <domain>
+  Kullanim/Test: /auto-pwn domain:example.com — Port taramasi + teknoloji kesfi + saldiri zinciri onerisi yapar.
+  Ne ise yarar: Hedef domain icin port taramasi, teknoloji tespiti ve otomatik saldiri zinciri onerisi olusturur.
+
+/git-dump <url>
+  Kullanim/Test: /git-dump url:https://example.com — .git dizininin acik olup olmadigini kontrol eder; HEAD, config, index dosyalarini okur.
+  Ne ise yarar: Web sunucusunda .git dizininin acik olup olmadigini tarar (kaynak kod ifsasi).
+
+/dev-istihbarat <kullanici>
+  Kullanim/Test: /dev-istihbarat kullanici:torvalds — GitHub profil detaylari, son aktivite, calisma saatleri tahmini yapar.
+  Ne ise yarar: GitHub kullanicisinin profil bilgisi, sirketi, lokasyonu, aktivite ve calisma saatlerini cikarir.
+
+/hizmet-analiz <ip>
+  Kullanim/Test: /hizmet-analiz ip:8.8.8.8 — Shodan InternetDB uzerinden IP'nin acik port ve servislerini listeler.
+  Ne ise yarar: IP adresinin acik portlarini, servislerini (CPE) ve varsa zafiyetlerini listeler.
+
+/saldirgan-avi <ip>
+  Kullanim/Test: /saldirgan-avi ip:45.33.32.156 — AlienVault OTX + Blocklist.de + AbuseIPDB ile IP'nin saldirganlik profilini cikarir.
+  Ne ise yarar: IP adresinin OTX, Blocklist.de ve AbuseIPDB'deki tehdit istihbarati verilerini sorgular.
+
+/zararli-analiz <hedef>
+  Kullanim/Test: /zararli-analiz hedef:example.com — VirusTotal API ile domain/IP/dosya hash zararli yazilim analizi yapar.
+  Ne ise yarar: VirusTotal API ile hedefin zararli yazilim skorunu ve tespit eden motorlari listeler.
+
+/sosyal-graf <domain>
+  Kullanim/Test: /sosyal-graf domain:example.com — SOA admin e-postasi, registrar, Hunter.io ile domain personel epostalarini cikarir.
+  Ne ise yarar: Domain'in SOA admin e-postasi, kayitci ve Hunter.io ile personel e-postalari gibi sosyal baglantilarini cikarir.
+
+/sql-yaz <talimat> [veritabani]
+  Kullanim/Test: /sql-yaz talimat:tum musterileri yasa gore sirala veritabani:PostgreSQL — AI'a dogal dilde SQL sorgusu yazdirir.
+  Ne ise yarar: Dogal dilde verilen talimati AI ile SQL sorgusuna cevirir.
+
+/derin-tarama <domain>
+  Kullanim/Test: /derin-tarama domain:example.com — crt.sh alt alanlari + Google dork linklerini birlikte verir.
+  Ne ise yarar: Domain'in crt.sh alt alanlarini ve kullanilabilir Google dork linklerini listeler.
+
+/shoden-tam <ip>
+  Kullanim/Test: /shodan-tam ip:8.8.8.8 — Shodan API (varsa) ile detayli IP taramasi; yoksa InternetDB ucretsiz verilerini kullanir.
+  Ne ise yarar: Shodan API ve InternetDB ile IP'nin acik portlarini, zafiyetlerini ve lokasyonunu detayli sekilde sorgular.
+
+/api-test <url> [metod] [body]
+  Kullanim/Test: /api-test url:https://jsonplaceholder.typicode.com/posts/1 metod:GET — API endpoint'ine istek gonderip yanit suresini ve body'i gosterir.
+  Ne ise yarar: Herhangi bir URL'ye GET/POST/PUT istegi gonderip yaniti, suresini ve durum kodunu gosterir.
+
+/port-kazi <hedef>
+  Kullanim/Test: /port-kazi hedef:example.com — 20 yaygin portu (FTP, SSH, HTTP, MySQL, MongoDB vb.) tarar.
+  Ne ise yarar: Hedef sunucuda 20 yaygin portun acik olup olmadigini es zamanli tarar.
+
+/favicon-hash <domain>
+  Kullanim/Test: /favicon-hash domain:example.com — Site favicon'unun SHA-256 hash'ini alip Shodan arama linki verir.
+  Ne ise yarar: Sitenin favicon.ico dosyasinin SHA-256 hash'ini hesaplayip Shodan sorgusu olusturur.
+
+/cookie-analiz <url>
+  Kullanim/Test: /cookie-analiz url:https://example.com — Set-Cookie header'ini analiz eder; HttpOnly, Secure, SameSite flag'lerini kontrol eder.
+  Ne ise yarar: Web sitesinin Set-Cookie header'ini guvenlik flag'leri (HttpOnly/Secure/SameSite) acisindan analiz eder.
+
+/js-analiz <url>
+  Kullanim/Test: /js-analiz url:https://example.com — Sayfadaki JS dosyalarinda API key, token, secret gibi sizintilari tarar.
+  Ne ise yarar: Sayfadaki JavaScript dosyalarinda hardcoded API key, token, secret, endpoint gibi hassas verileri tarar.
+
+/cms-parmak <url>
+  Kullanim/Test: /cms-parmak url:https://example.com — 20+ CMS/framework (WordPress, Joomla, Next.js, Laravel vb.) parmak izi taramasi yapar.
+  Ne ise yarar: Sitedeki CMS, framework ve teknoloji isaretlerini (WordPress, React, Django vb.) tespit eder.
+
+/dork-komple <domain>
+  Kullanim/Test: /dork-komple domain:example.com — 15 adet Google dork sorgusunu domain icin otomatik olusturup linklerini verir.
+  Ne ise yarar: Domain icin 15 adet Google dork (filetype, inurl, intitle) sorgusu olusturur.
+
+/domain-fresh <terim>
+  Kullanim/Test: /domain-fresh terim:bankacilik — Anahtar kelimeyle ilgili yeni kaydedilmis domain arastirmasi icin linkler verir.
+  Ne ise yarar: Anahtar kelime bazli yeni domain kayitlari icin DNPedia, ExpiredDomains gibi kaynak linklerini verir.
+
+/gov-tr <domain>
+  Kullanim/Test: /gov-tr domain:example.gov.tr — .env, admin panel kontrolu ve crt.sh alt alan taramasi yapar.
+  Ne ise yarar: .gov.tr domain'leri icin ozel guvenlik taramasi (.env, admin panel, alt alan) yapar.
+
+/kronoloji <domain>
+  Kullanim/Test: /kronoloji domain:example.com — Wayback Machine + crt.sh + SecurityTrails ile domain'in kronolojik gecmisini cikarir.
+  Ne ise yarar: Domain'in Wayback Machine, SSL sertifika ve DNS gecmisini kronolojik olarak listeler.
+
+/discord-sizdir <terim>
+  Kullanim/Test: /discord-sizdir terim:discord.gg/example — Pastebin + GitHub'da Discord webhook, bot token, davet linki sizintisi tarar.
+  Ne ise yarar: Pastebin ve GitHub'da Discord ile ilgili sizintilari (webhook, token, davet linki) arar.
+
+
+======================================================================
+  WEB OSINT - /web-osint
+======================================================================
+
+/ip-gecmis <ip>
+  Kullanim/Test: /web-osint ip-gecmis ip:8.8.8.8 — RIPE RDAP + ip-api ile IP'nin WHOIS kaydini ve lokasyonunu cikarir.
+  Ne ise yarar: IP adresinin RIPE RDAP gecmis kaydini, lokasyonunu ve ISP bilgisini sorgular.
+
+/bgp-tara <hedef>
+  Kullanim/Test: /web-osint bgp-tara hedef:AS15169 — AS numarasinin BGP route bilgilerini, peer'larini ve holder bilgisini getirir.
+  Ne ise yarar: ASN'nin RIPE BGP route, peer ve holder bilgilerini sorgular.
+
+/ping-tarama <hedef> [port]
+  Kullanim/Test: /web-osint ping-tarama hedef:example.com port:443 — Hedefin 80, 443, 22 gibi portlarinda HTTP HEAD testi yapar.
+  Ne ise yarar: Hedef sunucuda 5 yaygin portun acik/kapali durumunu HTTP HEAD ile test eder.
+
+/traceroute-sim <hedef> [atlamasayisi]
+  Kullanim/Test: /web-osint traceroute-sim hedef:example.com atlamasayisi:15 — DNS cozumlemeli traceroute simülasyonu yapar.
+  Ne ise yarar: Hedefe giden ag yolunu traceroute simulasyonu ile cikarir (atlama noktalarini listeler).
+
+/cdn-harita <domain>
+  Kullanim/Test: /web-osint cdn-harita domain:example.com — Cloudflare, Akamai, Fastly gibi 10 CDN'i tespit etmeye calisir.
+  Ne ise yarar: Domain'in kullandigi CDN hizmetini (Cloudflare, Akamai, Fastly vb.) header analiziyle tespit eder.
+
+/websiteleri-ortak <domainler>
+  Kullanim/Test: /web-osint websiteleri-ortak domainler:example.com,example.org — Iki domainin IP, ISP, ASN bilgilerini karsilastirir, ortak altyapiyi tespit eder.
+  Ne ise yarar: Birden fazla domainin ayni IP/ISP/ASN uzerinde barinip barinmadigini karsilastirir.
+
+/subdomain-takeover <domain>
+  Kullanim/Test: /web-osint subdomain-takeover domain:example.com — crt.sh alt alanlarinda 404/no such bucket gibi takeover potansiyeli tarar.
+  Ne ise yarar: Alt alan adlarinda subdomain takeover zafiyeti potansiyelini tarar.
+
+/firebase-ara <domain>
+  Kullanim/Test: /web-osint firebase-ara domain:myapp — Firebase Realtime Database'in acik olup olmadigini 4 farkli URL'de kontrol eder.
+  Ne ise yarar: Domain'in Firebase veritabanlarinin (firebaseio.com) public erisime acik olup olmadigini kontrol eder.
+
+/jwt-coz <token>
+  Kullanim/Test: /web-osint jwt-coz token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U — JWT header, payload, signature bilgilerini cozer, gecerlilik suresini kontrol eder.
+  Ne ise yarar: JWT token'in header, payload ve signature kismini cozup sure ve icerik analizi yapar.
+
+/http-gecmis <domain>
+  Kullanim/Test: /web-osint http-gecmis domain:example.com — Wayback Machine'den domain'in son 5 snapshot'unu tarih + durum koduyla listeler.
+  Ne ise yarar: Wayback Machine API ile domain'in HTTP gecmis snapshoot'larini getirir.
+
+/url-tara <url>
+  Kullanim/Test: /web-osint url-tara url:https://example.com — VirusTotal + AlienVault OTX ile URL itibar/zararlilik analizi yapar.
+  Ne ise yarar: URL'i VirusTotal ve OTX ile zararli yazilim/phishing itibari acisindan analiz eder.
+
+/censys-sorgu <hedef>
+  Kullanim/Test: /web-osint censys-sorgu hedef:8.8.8.8 — Shodan InternetDB + crt.sh ile IP/domain hakkinda bilgi toplar (Censys alternatifi).
+  Ne ise yarar: Shodan InternetDB ve crt.sh ile IP/domain hakkinda port, hostname, sertifika bilgisi toplar.
+
+/s3-tara <domain>
+  Kullanim/Test: /web-osint s3-tara domain:example — AWS S3 bucket'larinin public erisime acik olup olmadigini tarar.
+  Ne ise yarar: Domain ile iliskili AWS S3 bucket'larinda public listelemeyi kontrol eder.
+
+/github-dork <kelime>
+  Kullanim/Test: /web-osint github-dork kelime:tesla — GitHub'da api_key, password, token gibi 9 farkli pattern ile kod taramasi yapar.
+  Ne ise yarar: GitHub kod aramasinda anahtar kelimeyle birlikte api_key, token, secret gibi sizinti pattern'lerini tarar.
+
+/cryptoscan <domain>
+  Kullanim/Test: /web-osint cryptoscan domain:example.com — SSL Labs API ile TLS/SSL notu, protokol ve sifreleme suite'lerini analiz eder.
+  Ne ise yarar: SSL Labs API ile TLS/SSL konfigurasyonunu (not, BEAST, Heartbleed, POODLE) analiz eder.
+
+/dork-avla <domain>
+  Kullanim/Test: /web-osint dork-avla domain:example.com — SQL, Env, Config, Admin panel gibi 12 kategoride Google dork linkleri olusturur.
+  Ne ise yarar: Domain icin SQL acigi, .env, config, admin panel gibi 12 farkli kategoride dork linkleri olusturur.
+
+/waf-as <url>
+  Kullanim/Test: /web-osint waf-as url:https://example.com — Cloudflare, Sucuri, Akamai, ModSecurity gibi WAF/guvenlik duvari tespiti yapar.
+  Ne ise yarar: Web sitesinin hangi WAF/guvenlik duvarini (Cloudflare, Sucuri, Akamai vb.) kullandigini tespit eder.
+
+/email-sorgula <email>
+  Kullanim/Test: /web-osint email-sorgula email:test@example.com — HIBP + psbdmp.cc ile e-posta sizinti taramasi yapar.
+  Ne ise yarar: E-posta adresinin HIBP ve Pastebin'deki sizinti kayitlarini sorgular.
+
+/sifre-sorgula <sifre>
+  Kullanim/Test: /web-osint sifre-sorgula sifre:password123 — Sifrenin SHA-1 hash'ini alip Have I Been Pwned veritabaninda kac kez goruldugunu sorgular (k-anonymity).
+  Ne ise yarar: Sifrenin sizinti veritabanlarinda kac kez goruldugunu guvenli bir sekilde (k-anonymity) sorgular.
+
+/breach-scanner <domain>
+  Kullanim/Test: /web-osint breach-scanner domain:example.com — Domain'in .env dosyasinin acik olup olmadigini kontrol eder.
+  Ne ise yarar: Domain'de .env gibi hassas dosyalarin acik erisime sahip olup olmadigini tarar.
+
+/pastebin-ara <kelime>
+  Kullanim/Test: /web-osint pastebin-ara kelime:companyname — psbdmp.cc uzerinden Pastebin'de kelimeyle eslesen sizinti kayitlarini arar.
+  Ne ise yarar: Pastebin ve Gist'te belirtilen kelimeyle ilgili sizinti kayitlarini arar.
+
+/whois-detay <domain>
+  Kullanim/Test: /web-osint whois-detay domain:example.com — RDAP WHOIS + DNS kayitlarini (A, MX, NS, TXT) birlikte gosterir.
+  Ne ise yarar: Detayli WHOIS ve DNS kayitlarini tek sorguda birlestirir.
+
+/web-arsiv <domain>
+  Kullanim/Test: /web-osint web-arsiv domain:example.com — Wayback Machine'de domain'in ilk ve son kayit tarihini ve sayisini gosterir.
+  Ne ise yarar: Domain'in Wayback Machine'deki ilk ve son kayit tarihlerini ve toplam kayit sayisini gosterir.
+
+/sertifika-transparan <domain>
+  Kullanim/Test: /web-osint sertifika-transparan domain:example.com — crt.sh sertifika seffaflik kayitlarindan alt alanlari ve sertifika sayisini cikarir.
+  Ne ise yarar: crt.sh sertifika seffaflik kayitlarindan domain'in alt alan adlarini cikarir.
+
+/asn-tarama <asn>
+  Kullanim/Test: /web-osint asn-tarama asn:AS15169 — ASN'nin ISP, organizasyon ve lokasyon bilgisini getirir.
+  Ne ise yarar: ASN numarasina bagli ISP, organizasyon ve lokasyon bilgisini sorgular.
+
+/cdn-gercek-ip <domain>
+  Kullanim/Test: /web-osint cdn-gercek-ip domain:example.com — CDN arkasindaki origin IP'yi subdomain DNS taramasi ve HackerTarget ile bulmaya calisir.
+  Ne ise yarar: CDN arkasindaki sunucunun gercek IP adresini subdomain DNS ve HackerTarget ile tespit etmeye calisir.
+
+/dns-zone <domain>
+  Kullanim/Test: /web-osint dns-zone domain:example.com — NS sunucularinda zone transfer (AXFR) acigini HackerTarget API ile test eder.
+  Ne ise yarar: DNS Zone Transfer (AXFR) zafiyetini NS sunuculari uzerinde test eder.
+
+/cdn-atlat <domain>
+  Kullanim/Test: /web-osint cdn-atlat domain:example.com — crt.sh + SecurityTrails + Censys linkleri + subdomain DNS ile origin IP tespiti yapar.
+  Ne ise yarar: CDN atlatma icin crt.sh, SecurityTrails, Censys ve subdomain DNS taramasiyla origin IP tespiti yapar.
+
+/smtp-banner <domain>
+  Kullanim/Test: /web-osint smtp-banner domain:example.com — MX kayitlarini bulup telnet/nc/openssl ile SMTP banner kontrolu icin komutlar verir.
+  Ne ise yarar: Domain'in MX kayitlarini ve SMTP banner kontrolu icin gerekli komutlari verir.
+
+/soa-kaz <domain>
+  Kullanim/Test: /web-osint soa-kaz domain:example.com — SOA kaydindan admin e-postasi, serial numara, refresh/retry/expire degerlerini cikarir.
+  Ne ise yarar: Domain'in SOA DNS kaydini cozumleyip admin e-posta ve zone yapilandirma bilgilerini cikarir.
+
+/etag-parmak <url>
+  Kullanim/Test: /web-osint etag-parmak url:https://example.com — ETag header'indan sunucu tipini (Apache/Nginx/IIS) tahmin eder.
+  Ne ise yarar: HTTP ETag header'ini analiz ederek arka plandaki web sunucusunun turunu parmak iziyle tespit eder.
+
+
+======================================================================
+  MOBIL OSINT - /mobil-osint
+======================================================================
+
+/telefon-sorgula <telefon>
+  Kullanim/Test: /mobil-osint telefon-sorgula telefon:+905551234567 — Ulke kodu tespiti + Numverify API ile operator ve hat turu dogrulamasi yapar.
+  Ne ise yarar: Telefon numarasinin ulke, operator ve hat turu bilgilerini sorgular.
+
+/imei-coz <imei>
+  Kullanim/Test: /mobil-osint imei-coz imei:358988070123456 — IMEI'nin TAC kodundan cihaz marka/modelini cozer; checksum dogrulamasi yapar.
+  Ne ise yarar: IMEI numarasinin ilk 8 hanesinden (TAC) cihaz marka ve modelini tespit eder.
+
+/cihaz-detay <bilgi>
+  Kullanim/Test: /mobil-osint cihaz-detay bilgi:iPhone 15 Pro — GSMArena API'den cihazin ekran, islemci, kamera, batarya ozelliklerini getirir.
+  Ne ise yarar: Cihaz isminden GSMArena veritabaninda detayli teknik ozellikleri sorgular.
+
+/apk-incele <apk_url>
+  Kullanim/Test: /mobil-osint apk-incele apk_url:com.whatsapp — APKPure API'den uygulama bilgisi + VirusTotal skoru cikarir (API anahtari varsa).
+  Ne ise yarar: APK paket adindan uygulama bilgisi, izinler ve VirusTotal zararli yazilim skorunu sorgular.
+
+/apk-tehlikeli <hash>
+  Kullanim/Test: /mobil-osint apk-tehlikeli hash:44d88612fea8a8f36de82e1278abb02f — VirusTotal + AlienVault OTX ile dosya hash'inin zararlilik analizini yapar.
+  Ne ise yarar: APK dosya hash'ini VirusTotal ve AlienVault OTX'te zararli yazilim acisindan tarar.
+
+/apk-gizli <apk_url>
+  Kullanim/Test: /mobil-osint apk-gizli apk_url:com.example.app — APK icindeki API key, token, JWT, Base64 gibi potansiyel gizli verileri regex ile tarar.
+  Ne ise yarar: APK icerigindeki hardcoded API key, URL, Firebase URL, JWT gibi gomulu gizli verileri tarar.
+
+/play-store <sorgu>
+  Kullanim/Test: /mobil-osint play-store sorgu:whatsapp — Google Play Store'da uygulama arar; isim, yayinci, puan, indirme bilgisi cikarir.
+  Ne ise yarar: Google Play Store'da uygulama aramasi yapip temel bilgileri (puan, yayinci, indirme) cikarir.
+
+/app-store <sorgu>
+  Kullanim/Test: /mobil-osint app-store sorgu:instagram — Apple App Store'da uygulama arar; surum, puan, boyut, iOS gereksinimi bilgisi cikarir.
+  Ne ise yarar: Apple App Store'da uygulama aramasi yapip detayli bilgileri (surum, puan, boyut) cikarir.
+
+/mobil-operator-detay <telefon>
+  Kullanim/Test: /mobil-osint mobil-operator-detay telefon:+905551234567 — Turk operator kod tablosundan operator, hat turu ve bolge bilgisini cikarir.
+  Ne ise yarar: Telefon numarasinin operator kodundan operator adi, hat turu ve bolge bilgisini cikarir.
+
+/mobil-ulke <kod>
+  Kullanim/Test: /mobil-osint mobil-ulke kod:+90 — Ulke kodundan baskent, nufus, para birimi, operatorler ve numara formati bilgisi verir.
+  Ne ise yarar: Telefon ulke kodundan (MCC) ulke, baskent, nufus, para birimi ve operator bilgilerini listeler.
+
+/whatsapp-profil <telefon>
+  Kullanim/Test: /mobil-osint whatsapp-profil telefon:905551234567 — WhatsApp'ta numaranin kayitli olup olmadigini kontrol eder.
+  Ne ise yarar: WhatsApp'ta numaranin kayitli olup olmadigini wa.me linki uzerinden kontrol eder.
+
+/mobil-izler <paket>
+  Kullanim/Test: /mobil-osint mobil-izler paket:com.spotify.music — Google Play Store'dan uygulama izinleri, yayinci ve dijital izleri cikarir.
+  Ne ise yarar: Android paket adi uzerinden Play Store bilgisi ve APKMirror/VirusTotal iz baglantilarini verir.
+
+/gsmarena <model>
+  Kullanim/Test: /mobil-osint gsmarena model:Galaxy S24 — GSMArena API'den cihazlarin ekran, islemci, batarya, kamera detaylarini listeler.
+  Ne ise yarar: GSMArena'da cihaz modeli arar ve bulunan cihazlarin teknik detaylarini listeler.
+
+/mobil-cve <model>
+  Kullanim/Test: /mobil-osint mobil-cve model:iPhone 15 — CIRCL CVE API + NIST NVD'de cihaz modeliyle ilgili CVE guvenlik aciklarini arar.
+  Ne ise yarar: Mobil cihaz modeliyle ilgili CVE guvenlik aciklarini CIRCL ve NIST NVD veritabanlarinda arar.
+
+/bin-sorgu <bin>
+  Kullanim/Test: /mobil-osint bin-sorgu bin:411111 — Kredi kartinin ilk 6 hanesinden (BIN) banka, kart agi, ulke ve kart tipi bilgisi cikarir.
+  Ne ise yarar: Kredi karti BIN numarasindan banka, kart agi, ulke, para birimi ve kart seviyesini sorgular.
+
+/airtag-iz <koordinat>
+  Kullanim/Test: /mobil-osint airtag-iz koordinat:41.0082,28.9784 — AirTag/Find My tespit yontemleri; Google Maps, Apple Maps ve tespit uygulamasi linkleri verir.
+  Ne ise yarar: AirTag/Bluetooth takip cihazi tespit yontemleri ve konum linklerini (Apple Find My, Tracker Detect) paylasir.
+
+/sms-bomber <telefon>
+  Kullanim/Test: /mobil-osint sms-bomber telefon:905551234567 — Instagram, WhatsApp, Telegram, TikTok gibi platformlarin SMS dogrulama endpoint linklerini verir (bombardiman yapmaz).
+  Ne ise yarar: Populer platformlarin SMS dogrulama endpoint'lerini bilgi amaciyla listeler.
+
+/mack-adres <mac>
+  Kullanim/Test: /mobil-osint mack-adres mac:00:1B:44:11:3A:B7 — MAC adresinin OUI'sinden uretici, cihaz tipi (Apple, VMware, VirtualBox) bilgisi cikarir.
+  Ne ise yarar: MAC adresinin uretici bilgisini (OUI) ve cihaz tipi tahminini (fiziksel/sanal) yapar.
+
+/esim-sorgu <iccid>
+  Kullanim/Test: /mobil-osint esim-sorgu iccid:8928603000012345678 — eSIM ICCID numarasindan ulke kodu (MCC), operator (MNC), Luhn kontrol basamagi analizi yapar.
+  Ne ise yarar: eSIM/SIM kart ICCID numarasindan ulke, operator ve ICCID yapisini cozumler.
+
+
+======================================================================
+  SOSYAL MUHENDISLIK - /sosyal-muh
+======================================================================
+
+/oltala <hedef> <maske>
+  Kullanim/Test: /sosyal-muh oltala hedef:https://accounts.google.com maske:Google Guvenlik Kontrolu — Hedef URL'i maskeleyen phishing sayfasi linki olusturur.
+  Ne ise yarar: Hedef siteyi taklit eden phishing linki olusturur (KV'de saklanir).
+
+/qr-phish <hedef>
+  Kullanim/Test: /sosyal-muh qr-phish hedef:https://example.com/login — Phishing sayfasi icin QR kod olusturup linkini verir.
+  Ne ise yarar: Phishing linkini QR koda cevirip kullanima hazir hale getirir.
+
+/fake-login <tur>
+  Kullanim/Test: /sosyal-muh fake-login tur:google — Google, Instagram, Twitter, Discord sahte giris sayfasi olusturur.
+  Ne ise yarar: Belirtilen platformun (Google/Instagram/Twitter/Discord) sahte login sayfasini olusturup link verir.
+
+/link-mask <hedef> <maske>
+  Kullanim/Test: /sosyal-muh link-mask hedef:https://evil.com maske:Hediye Kazandiniz — HTML/Markdown formatinda maskelenmis link olusturur.
+  Ne ise yarar: Gercek hedef URL'ini farkli bir metinle maskeleyen Markdown ve HTML kodu uretir.
+
+/deep-voice <ses> [metin]
+  Kullanim/Test: /sosyal-muh deep-voice — Ses dosyasi yukleyin. Ses dosyasi analiz edilir ve klonlama icin AI ses modeli bilgisi verilir.
+  Ne ise yarar: Ses klonlama (deep voice) analizi - ses dosyasi boyutu, formati ve tahmini klonlama suresi bilgisi verir.
+
+/otp-bypass <hedef>
+  Kullanim/Test: /sosyal-muh otp-bypass hedef:https://example.com/login — Header analizi + 8 OTP bypass teknigi onerisi (rate limit, race condition vb.).
+  Ne ise yarar: OTP bypass teknikleri listeler (rate limiting atlatma, race condition, SMS bomber, hata mesaji analizi).
+
+/call-spoof <hedef> <maske>
+  Kullanim/Test: /sosyal-muh call-spoof hedef:+905551234567 maske:+902121234567 — Caller ID spoofing yontemleri (SIP, SS7, WebRTC) ve tespit yontemleri.
+  Ne ise yarar: Caller ID spoofing tekniklerini (VoIP, SS7, WebRTC) ve bunlarin tespit yontemlerini aciklar.
+
+/vishing-senaryo <hedef> <senaryo>
+  Kullanim/Test: /sosyal-muh vishing-senaryo hedef:ornek-kisi senaryo:banka — Banka, teknik destek, kamu olmak uzere vishing senaryolari ve adim adim akisi verir.
+  Ne ise yarar: Vishing (telefon dolandiriciligi) senaryolari (banka, teknik destek, kamu) olusturur.
+
+/credential-stuff <url> <kullanici>
+  Kullanim/Test: /sosyal-muh credential-stuff url:https://example.com/login kullanici:admin — Site erisim + rate limit kontrolu + credential stuffing test akisi onerisi.
+  Ne ise yarar: Credential stuffing saldirisi icin hedef analizi, rate limit kontrolu ve test akisi onerisi yapar.
+
+/gorsel-osint <fotograf>
+  Kullanim/Test: /sosyal-muh gorsel-osint — Bir fotograf yukleyin. Google Lens, Yandex, TinEye, Bing gorsel arama linkleri verir.
+  Ne ise yarar: Fotograf icin Google Lens, Yandex, TinEye, Bing gorsel arama linkleri ve AI analiz ipuclari verir.
+
+/email-derin <email>
+  Kullanim/Test: /sosyal-muh email-derin email:test@example.com — MX kayitlari, PGP anahtar, sizinti kontrolu, platform dogrulama linkleri verir.
+  Ne ise yarar: E-posta adresinin MX kayitlari, PGP anahtar aramasi, platform dogrulama ve sizinti kontrol linklerini verir.
+
+/sifre-tahmin <isim> [soyisim] [dogum]
+  Kullanim/Test: /sosyal-muh sifre-tahmin isim:Ahmet soyisim:Yilmaz dogum:1990 — Ad, soyad ve dogum yilindan 30 olasi sifre kombinasyonu tahmin eder.
+  Ne ise yarar: Kisi bilgilerinden (ad, soyad, dogum yili) olasi sifre kombinasyonlari uretir.
+
+/hash-coz <hash>
+  Kullanim/Test: /sosyal-muh hash-coz hash:5d41402abc4b2a76b9719d911017c592 — Hash tipini tespit edip ucretsiz cozme linkleri ve hashcat komutlari verir.
+  Ne ise yarar: Hash tipini tespit eder (MD5/SHA1/Bcrypt) ve cozme icin web siteleri + hashcat komutlari onerir.
+
+/sms-spoof <hedef> [gonderen]
+  Kullanim/Test: /sosyal-muh sms-spoof hedef:+905551234567 gonderen:Banka — SMS spoofing teknikleri ve Turk operator email-to-SMS gateway adreslerini verir.
+  Ne ise yarar: SMS spoofing teknikleri ve operator email-to-SMS gateway adreslerini listeler.
+
+/typosquat <domain>
+  Kullanim/Test: /sosyal-muh typosquat domain:example.com — Eksik harf, yer degistirme, homograf, tire ekleme varyasyonlari uretip DNS kontrolu yapar.
+  Ne ise yarar: Typosquatting domain varyasyonlari uretip hangilerinin DNS'de aktif oldugunu kontrol eder.
+
+/evil-nginx <hedef>
+  Kullanim/Test: /sosyal-muh evil-nginx hedef:https://example.com — Cloudflare Worker uzerinde calisacak reverse proxy phishing kodu olusturur.
+  Ne ise yarar: Hedef siteyi taklit eden reverse proxy Worker kodu uretir (cookie ve credential yakalama).
+
+/push-bomb <telefon>
+  Kullanim/Test: /sosyal-muh push-bomb telefon:905551234567 — Instagram, WhatsApp, Discord, Amazon gibi 20+ servisin sifre sifirlama linklerini listeler.
+  Ne ise yarar: Populer servislerin SMS dogrulama/sifre sifirlama linklerini listeler (push bomb bilgi amaclidir).
+
+/deepfake-onizle <fotograf>
+  Kullanim/Test: /sosyal-muh deepfake-onizle — Bir fotograf yukleyin. AI yuz analizi + DeepFaceLab/FaceSwap egitim workflow'u verir.
+  Ne ise yarar: Yuz fotografi AI analizi ve deepfake uretimi icin DeepFaceLab workflow adimlarini aciklar.
+
+
+======================================================================
+  GOZETIM - /gozetim
+======================================================================
+
+/canli-takip <hedef> [tur]
+  Kullanim/Test: /gozetim canli-takip hedef:8.8.8.8 tur:ip — Hedefin turune gore IP lokasyonu/Shodan, e-posta sizintisi veya domain DNS analizi yapar.
+  Ne ise yarar: IP, email veya domain hedefi otomatik tespit edip kapsamli anlik takip bilgisi verir.
+
+/alan-izle <domain>
+  Kullanim/Test: /gozetim alan-izle domain:example.com — SOA, MX, NS, A, AAAA, TXT, CNAME kayitlarini ve RDAP WHOIS bilgisini toplu cikarir.
+  Ne ise yarar: Domain'in tum DNS kayitlarini ve WHOIS bilgisini toplu olarak izler.
+
+/sizinti-alarm <hedef>
+  Kullanim/Test: /gozetim sizinti-alarm hedef:test@example.com — HIBP + psbdmp.cc + LeakCheck ile derin sizinti taramasi yapar.
+  Ne ise yarar: E-posta/domain icin HIBP, Pastebin ve LeakCheck uzerinde kapsamli sizinti alarmi olusturur.
+
+/hedef-izle <kullanici>
+  Kullanim/Test: /gozetim hedef-izle kullanici:johnsmith — 25 platformda (Instagram, GitHub, LinkedIn, Telegram vb.) profil taramasi yapar.
+  Ne ise yarar: 25 sosyal/profesyonel platformda kullanici adinin varligini es zamanli tarar.
+
+/hedef-dosya <hedef>
+  Kullanim/Test: /gozetim hedef-dosya hedef:1.1.1.1 — IP/domain/email verilerini JSON dosya olarak KV'ye kaydeder, dosya ID'si verir.
+  Ne ise yarar: Hedef hakkinda toplanan verileri JSON dosyasi olarak 30 gun sureyle KV'de saklar.
+
+/karsilastir <hedef1> <hedef2>
+  Kullanim/Test: /gozetim karsilastir hedef1:8.8.8.8 hedef2:1.1.1.1 — Iki IP/domain'i ISP, lokasyon, ASN ve mesafe acisindan karsilastirir.
+  Ne ise yarar: Iki IP/domain'i karsilastirip ortak ISP, sehir, ASN ve aralarindaki mesafeyi hesaplar.
+
+/network-graf <domain>
+  Kullanim/Test: /gozetim network-graf domain:example.com — DNS A kaydi, IP analizi, ASN bilgisi, NS/MX/CNAME/TXT kayitlari ve RDAP bilgisini tek seferde cikarir.
+  Ne ise yarar: Domain'in tum ag altyapi baglantilarini (DNS, IP, ASN, RDAP) grafiksel olmayan metin raporu seklinde cikarir.
+
+/zaman-sirasi <kullanici>
+  Kullanim/Test: /gozetim zaman-sirasi kullanici:torvalds — GitHub aktivite saat/gun dagilimi, en aktif oldugu zaman dilimleri ve calisma saatleri analizi.
+  Ne ise yarar: GitHub kullanicisinin aktivite zaman cizelgesini analiz edip en aktif saat ve gunleri, calisma rutinini cikarir.
+
+/exif-toplu <gorseller>
+  Kullanim/Test: /gozetim exif-toplu — Birden fazla fotograf yukleyin. EXIF metadata (kamera, ISO, GPS) + SHA-256 hash analizi yapar.
+  Ne ise yarar: Birden fazla goruntunun EXIF metadata, format, cozunurluk ve SHA-256 hash bilgisini toplu cikarir.
+
+/metadata-oku <dosya>
+  Kullanim/Test: /gozetim metadata-oku — Herhangi bir dosya yukleyin. MD5, SHA-1, SHA-256 hash + magic bytes + dosya siniflandirmasi yapar.
+  Ne ise yarar: Yuklenen dosyanin hash degerleri (MD5/SHA1/SHA256), magic bytes imzasi ve dosya turu siniflandirmasini yapar.
+
+/hash-dogrula <dosya> [algoritma]
+  Kullanim/Test: /gozetim hash-dogrula — Bir dosya yukleyin, algoritma:sha256. Hash hesaplayip VirusTotal + OTX'te arar.
+  Ne ise yarar: Dosyanin hash degerini hesaplayip VirusTotal ve AlienVault OTX'te zararlilik kontrolu yapar.
+
+/ekran-arsiv <url>
+  Kullanim/Test: /gozetim ekran-arsiv url:https://example.com — Sayfanin ekran goruntusunu alip HTML meta bilgisi, baslik, link/gorsel sayisi analizi yapar.
+  Ne ise yarar: Web sayfasinin ekran goruntusunu alir ve sayfa istatistiklerini (baslik, meta, link sayisi) cikarir.
+
+/eposta-izle <email>
+  Kullanim/Test: /gozetim eposta-izle email:test@example.com — Google, Microsoft, Facebook, Instagram, GitHub gibi 8 platformda hesap varligi kontrolu.
+  Ne ise yarar: 8 buyuk platformda (Google, Microsoft, FB, IG, GitHub vb.) e-posta adresinin hesap varligini kontrol eder.
+
+/veri-sizdir <email>
+  Kullanim/Test: /gozetim veri-sizdir email:test@example.com — HIBP + Pastebin + LeakCheck ile e-posta icin detayli sizinti verisi cikarir (sansurlu).
+  Ne ise yarar: E-posta adresinin sizinti veritabanlarindaki detayli kaydini cikarir (sifreler sansurlenir).
+
+/sgk-sorgu <tckn>
+  Kullanim/Test: /gozetim sgk-sorgu tckn:12345678901 — TCKN dogrulamasi + Belsis.art SGK API ile calisma kaydi sorgusu yapar.
+  Ne ise yarar: TC Kimlik No ile Belsis.art uzerinden SGK tescil/calisma kaydi sorgulama yapar.
+
+/mahkeme <isim> <soyisim>
+  Kullanim/Test: /gozetim mahkeme isim:Ahmet soyisim:Yilmaz — UYAP, Yargitay, AYM karar arama linkleri ve Google dork onerileri verir.
+  Ne ise yarar: Isim/soyisim ile UYAP, Yargitay karar arama ve Google mahkeme kaydi arama linkleri olusturur.
+
+/ticaret-sorgu <domain>
+  Kullanim/Test: /gozetim ticaret-sorgu domain:example.com — Ticaret Sicil Gazetesi, MERSIS ve WHOIS uzerinden firma bilgisi sorgulama linkleri verir.
+  Ne ise yarar: Domain uzerinden ticaret sicil, MERSIS ve WHOIS firma bilgisi sorgulama linkleri olusturur.
+
+/uav-tespit <ip>
+  Kullanim/Test: /gozetim uav-tespit ip:192.168.1.100 — IP'nin ISP/org bilgisinden drone ureticisi tespiti + MAVLink/DJI port taramasi yapar.
+  Ne ise yarar: IP adresinde drone/UAV (DJI, MAVLink) portlari ve ISP iliskisi uzerinden drone tespiti yapar.
+
+
+======================================================================
+  DERIN WEB - /derin-web
+======================================================================
+
+/tor-sorgu <onion>
+  Kullanim/Test: /derin-web tor-sorgu onion:facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion — .onion adresini Ahmia'da sorgular; versiyon ve gecerlilik kontrolu yapar.
+  Ne ise yarar: .onion adresini Ahmia indeksinde sorgulayip v2/v3 versiyon bilgisi verir.
+
+/tor-istatistik
+  Kullanim/Test: /derin-web tor-istatistik — Tor Metrics API'den anlik aktif relay sayisi, bridge sayisi ve toplam bant genisligini getirir.
+  Ne ise yarar: Tor aginin anlik istatistiklerini (relay sayisi, bant genisligi) gosterir.
+
+/i2p-tara <hedef>
+  Kullanim/Test: /derin-web i2p-tara hedef:example.b32.i2p — I2P adresinin format gecerliligini kontrol edip ag hakkinda bilgi verir.
+  Ne ise yarar: I2P adresinin gecerliligini kontrol eder ve I2P agi hakkinda temel bilgileri aciklar.
+
+/breach-forum <kelime>
+  Kullanim/Test: /derin-web breach-forum kelime:tesla — IntelX Phonebook API ile sizinti veritabanlarinda kayit arar.
+  Ne ise yarar: IntelX veritabaninda sizinti/sifre kaydi arar ve bulunan kayit ID'lerini listeler.
+
+/ransom-not <hedef>
+  Kullanim/Test: /derin-web ransom-not hedef:companyname — Ransomware.live API'de fidye yazilimi kurban listesinde hedef arar.
+  Ne ise yarar: Ransomware.live veritabaninda fidye yazilimi kurbanlarini arar.
+
+/deep-web-scan <kelime>
+  Kullanim/Test: /derin-web deep-web-scan kelime:market — Ahmia (.onion) + Google/DuckDuckGo linkleri ile derin web taramasi yapar.
+  Ne ise yarar: Ahmia'da .onion site taramasi + yuzey web arama motoru linkleriyle birlestirilmis arama yapar.
+
+/darkweb-gelismis <kelime>
+  Kullanim/Test: /derin-web darkweb-gelismis kelime:bitcoin — Ahmia + IntelX birlikte calisir; hem .onion hem sizinti veritabani sonuclarini tek raporda verir.
+  Ne ise yarar: Ahmia ve IntelX'i birlikte kullanarak .onion s ite ve sizinti veritabani sonuclarini birlestirir.
+
+/darkweb-arama <kelime>
+  Kullanim/Test: /derin-web darkweb-arama kelime:drugs — Sadece Ahmia'da .onion site arar; sonuc varsa baslik ve URL listeler.
+  Ne ise yarar: Ahmia arama motorunda .onion sitelerinde anahtar kelime taramasi yapar.
+
+
+======================================================================
+  SOSYAL MEDYA - /sosyal-medya
+======================================================================
+
+/telegram-sorgula <kullanici>
+  Kullanim/Test: /sosyal-medya telegram-sorgula kullanici:telegram — t.me profil sayfasini analiz edip profilin mevcut/gizli oldugunu tespit eder.
+  Ne ise yarar: Telegram kullanicisinin profil varligini t.me sayfasi uzerinden kontrol eder.
+
+/insan-ara <isim>
+  Kullanim/Test: /sosyal-medya insan-ara isim:johnsmith — Instagram, Twitter, GitHub, LinkedIn gibi 4 platformda profil taramasi yapar.
+  Ne ise yarar: Isimden Instagram, Twitter, GitHub, LinkedIn platformlarinda profil taramasi yapar.
+
+/dox-detay <kullanici>
+  Kullanim/Test: /sosyal-medya dox-detay kullanici:johndoe — GitHub profili + HIBP sizinti + psbdmp.cc Pastebin kayitlarini tek seferde sorgular.
+  Ne ise yarar: Kullanici adi icin GitHub, HIBP ve Pastebin kayitlarini birlestirilmis olarak sorgular.
+
+/insta-hikaye <kullanici>
+  Kullanim/Test: /sosyal-medya insta-hikaye kullanici:instagram — Instagram profil sayfasini kaziyip takipci, takip, gonderi sayisi, biyografi ve onayli durumunu cikarir.
+  Ne ise yarar: Instagram profilinden takipci sayisi, biyografi, gonderi sayisi ve onayli durumu gibi bilgileri cikarir.
+
+/tiktok-profil <kullanici>
+  Kullanim/Test: /sosyal-medya tiktok-profil kullanici:tiktok — TikTok profilini kaziyip takipci, takip, begeni sayisi, biyografi ve onayli durumunu cikarir.
+  Ne ise yarar: TikTok profilinden takipci, begeni sayisi, biyografi ve onayli durum bilgilerini cikarir.
+
+/reddit-profil <kullanici>
+  Kullanim/Test: /sosyal-medya reddit-profil kullanici:reddit — Reddit API ile post/yorum karmasi, hesap yasi, son yorumlari cikarir.
+  Ne ise yarar: Reddit kullanicisinin karma puani, hesap yasi ve son yorumlarini Reddit API uzerinden getirir.
+
+/telegram-kanal <kanal>
+  Kullanim/Test: /sosyal-medya telegram-kanal kanal:telegram — Telegram kanal/grup sayfasindan baslik, uye sayisi, aciklama bilgisi cikarir.
+  Ne ise yarar: Telegram kanalinin varligini, uye sayisini ve aciklamasini sayfa kazimayla cikarir.
+
+/steam-istihbarat <steamid>
+  Kullanim/Test: /sosyal-medya steam-istihbarat steamid:steamuser — Steam API ile profil adi, Steam ID, hesap olusturma tarihi bilgisi cikarir (STEAM_API_KEY gerekir).
+  Ne ise yarar: Steam kullanicisinin profil adi, Steam ID ve hesap olusturma tarihini Steam API ile sorgular.
+
+/sarki-profil <kullanici>
+  Kullanim/Test: /sosyal-medya sarki-profil kullanici:lastfmuser — Last.fm API ile dinleme sayisi, ulke ve en cok dinlenen 5 sanatciyi getirir (LASTFM_API_KEY gerekir).
+  Ne ise yarar: Last.fm kullanicisinin muzik profilini (dinleme sayisi, top sanatcilar) sorgular.
+
+/sosyal-derin <kullanici>
+  Kullanim/Test: /sosyal-medya sosyal-derin kullanici:johnsmith — 10 platformda (Instagram, Twitter, TikTok, Reddit, YouTube vb.) profil varligi taramasi.
+  Ne ise yarar: 10 sosyal medya platformunda kullanici adi profil varligini es zamanli tarar.
+
+/telegram-grup <grup>
+  Kullanim/Test: /sosyal-medya telegram-grup grup:telegramchannel — Telegram grup/kanal sayfasini analiz eder; baslik, aciklama ve varlik kontrolu yapar.
+  Ne ise yarar: Telegram grup/kanal bilgilerini (baslik, aciklama, mevcut durum) sayfa kazimayla cikarir.
+
+/cats-tara <kullanici>
+  Kullanim/Test: /sosyal-medya cats-tara kullanici:developer — GitHub, GitLab, Bitbucket, Keybase, Disqus gibi eski/kucuk platformlarda profil taramasi.
+  Ne ise yarar: GitHub, GitLab, Bitbucket, Keybase, Disqus gibi 8 eski/kucuk platformda profil varligini tarar.
+
+
+======================================================================
+  GUVENLIK - /guvenlik
+======================================================================
+
+/cdn-coz <domain>
+  Kullanim/Test: /guvenlik cdn-coz domain:example.com — CDN arkasindaki gercek IP'yi subdomain DNS taramasiyla bulmaya calisir.
+  Ne ise yarar: Yaygin subdomain'lerin DNS kayitlarini kontrol ederek CDN atlatma icin IP tespiti yapar.
+
+/port-hizli <ip>
+  Kullanim/Test: /guvenlik port-hizli ip:192.168.1.1 — 10 yaygin portu (FTP, SSH, HTTP, MySQL, RDP) es zamanli HTTP HEAD ile tarar.
+  Ne ise yarar: IP adresinde 10 yaygin portu hizli sekilde HTTP HEAD istekleriyle tarar.
+
+/tech-stack <domain>
+  Kullanim/Test: /guvenlik tech-stack domain:example.com — HTTP header + HTML analizi ile sunucu, CMS (WordPress), framework (Next.js, Shopify) tespiti yapar.
+  Ne ise yarar: Web sitesinin sunucu, CMS ve framework teknolojilerini header ve HTML analiziyle tespit eder.
+
+/ssl-coz <domain>
+  Kullanim/Test: /guvenlik ssl-coz domain:example.com — crt.sh sertifika bilgisi ve siteye HTTP baglanti testi yapar.
+  Ne ise yarar: crt.sh SSL sertifika kaydini ve siteye HTTP baglanti durumunu kontrol eder.
+
+/wp-scan <domain>
+  Kullanim/Test: /guvenlik wp-scan domain:example.com — WordPress'e ozgu wp-admin, wp-login.php, xmlrpc.php gibi dosyalarin varligini kontrol eder.
+  Ne ise yarar: WordPress sitelerinde wp-admin, wp-login, xmlrpc.php gibi kritik dosyalarin erisilebilirligini tarar.
+
+/header-guvenlik <domain>
+  Kullanim/Test: /guvenlik header-guvenlik domain:example.com — HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy header'larini kontrol eder.
+  Ne ise yarar: HTTP guvenlik header'larinin (HSTS, CSP, XFO, XCTO, RP) varligini denetler.
+
+/waf-test <url>
+  Kullanim/Test: /guvenlik waf-test url:https://example.com — SQLi, XSS, Path Traversal, SSRF payloadlari gonderip WAF engelleme oranini olcer.
+  Ne ise yarar: 4 farkli saldiri payloadu gonderip WAF'in kacini engelledigini test eder.
+
+/email-spoof <domain>
+  Kullanim/Test: /guvenlik email-spoof domain:example.com — SPF ve DMARC DNS kayitlarini kontrol edip email spoofing riskini degerlendirir.
+  Ne ise yarar: Domain'in SPF ve DMARC kayitlarini kontrol edip e-posta spoofing zafiyetini degerlendirir.
+
+/guvenlik-xss-tara <url>
+  Kullanim/Test: /guvenlik guvenlik-xss-tara url:https://example.com/search — 7 XSS payloadu gonderip response'da yansiyanlari tespit eder (Reflected XSS).
+  Ne ise yarar: 7 farkli XSS payloadu ile reflected XSS zafiyeti taramasi yapar.
+
+/clickjack-test <url>
+  Kullanim/Test: /guvenlik clickjack-test url:https://example.com — X-Frame-Options ve CSP frame-ancestors header'larini kontrol ederek clickjacking riskini degerlendirir.
+  Ne ise yarar: Sitenin iframe'de yuklenebilirligini (clickjacking) X-Frame-Options ve CSP header'lariyla test eder.
+
+/cors-test <url>
+  Kullanim/Test: /guvenlik cors-test url:https://example.com — Farkli origin header'lari gonderip Access-Control-Allow-Origin ve credentials durumunu test eder.
+  Ne ise yarar: CORS yapilandirmasini 4 farkli origin ile test edip credential'li CORS aciklarini tespit eder.
+
+/open-redirect <url>
+  Kullanim/Test: /guvenlik open-redirect url:https://example.com — 12 farkli redirect parametresiyle acik yonlendirme zafiyetini test eder.
+  Ne ise yarar: Open redirect zafiyetini 12 farkli payload ve parametre ile test eder.
+
+/jwt-kir <token>
+  Kullanim/Test: /guvenlik jwt-kir token:eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4ifQ.abc123 — JWT header/payload decode + 100+ yaygin secret ile sigorta kirma denemesi yapar.
+  Ne ise yarar: JWT token'in header/payload'unu cozer ve 100+ zayif secret ile HMAC-SHA256 kirmayi dener.
+
+/sql-injection-test <url>
+  Kullanim/Test: /guvenlik sql-injection-test url:https://example.com/page?id=1 — 10 SQLi payloadu gonderip SQL hata mesaji (syntax error, mysql_fetch vb.) tespiti yapar.
+  Ne ise yarar: 10 SQLi payloadu ile SQL hata mesajlarini yakalayarak enjeksiyon zafiyeti tespiti yapar.
+
+/nuclei-tara <url>
+  Kullanim/Test: /guvenlik nuclei-tara url:https://example.com — .env, .git/config, phpinfo.php, robots.txt gibi 15 hassas dosyayi tarar.
+  Ne ise yarar: Nuclei benzeri sekilde 15 hassas dosya/dizin varligini HTTP istekleriyle tarar.
+
+/log4j-tara <url>
+  Kullanim/Test: /guvenlik log4j-tara url:https://example.com — 11 HTTP header'ina ve URL parametrelerine JNDI payloadu enjekte edip yansima kontrolu yapar.
+  Ne ise yarar: Log4Shell zafiyeti icin HTTP header ve parametrelerde JNDI payload testi yapar.
+
+/ssti-tara <url> <param>
+  Kullanim/Test: /guvenlik ssti-tara url:https://example.com/page param:name — Jinja2, Twig, Freemarker, ERB gibi 6 template engine icin SSTI payload testi.
+  Ne ise yarar: 6 farkli template engine (Jinja2, Twig, Freemarker vb.) icin SSTI zafiyet testi yapar.
+
+/xxe-tara <url>
+  Kullanim/Test: /guvenlik xxe-tara url:https://example.com/api — XML POST istekleriyle /etc/passwd okuma, SSRF ve Billion Laughs DoS testi yapar.
+  Ne ise yarar: XXE zafiyetini XML POST istekleriyle (file read, SSRF, DoS) test eder.
+
+/csrf-tara <url>
+  Kullanim/Test: /guvenlik csrf-tara url:https://example.com — HTML formlarinda CSRF token kontrolu, SameSite cookie ve Origin header testi yapar.
+  Ne ise yarar: CSRF korumasi icin form token kontrolu, SameSite cookie ve Origin header analizi yapar.
+
+/idor-tara <url> <param>
+  Kullanim/Test: /guvenlik idor-tara url:https://example.com/user/1 param:id — Mevcut ID etrafindaki ID'lere (0, 1, 2, 100, 1000) erisim testi.
+  Ne ise yarar: IDOR zafiyeti icin farkli ID degerleriyle yetkisiz veri erisimi testi yapar.
+
+/race-window <url> <param>
+  Kullanim/Test: /guvenlik race-window url:https://example.com/api/vote param:user — 10 es zamanli POST istegi gonderip unique response kontroluyle TOCTOU testi yapar.
+  Ne ise yarar: Race condition (TOCTOU) zafiyeti icin 10 es zamanli istek gonderip yanit farkliliklarini analiz eder.
+
+/graphql-introspect <url>
+  Kullanim/Test: /guvenlik graphql-introspect url:https://example.com — 7 farkli GraphQL endpoint'inde introspection sorgusu gonderip schema yapisini cikarir.
+  Ne ise yarar: Acik GraphQL endpoint'lerinde introspection sorgusuyla schema bilgisi toplar.
+
+/deserialize <url> <param>
+  Kullanim/Test: /guvenlik deserialize url:https://example.com/api param:data — PHP, Java, Python Pickle, .NET, YAML deserialization payloadlariyla zafiyet testi.
+  Ne ise yarar: 5 farkli dilde (PHP, Java, Python, .NET, YAML) deserialization zafiyet testi yapar.
+
+/http-desync <url>
+  Kullanim/Test: /guvenlik http-desync url:https://example.com — CL.TE, TE.CL, TE.TE HTTP Request Smuggling testleri + manuel Burp Suite kilavuzu verir.
+  Ne ise yarar: HTTP Request Smuggling/Desync zafiyeti icin 3 farkli teknik (CL.TE, TE.CL, TE.TE) ile test yapar.
+
+
+======================================================================
+  COGRAFI OSINT - /cografi-osint
+======================================================================
+
+/exif-derin <fotograf>
+  Kullanim/Test: /cografi-osint exif-derin — Bir fotograf yukleyin. AI ile cihaz turu, cekim yeri (ic/dis mekan), lokasyon ipucu analizi yapar.
+  Ne ise yarar: Fotograftaki EXIF/metadata bilgilerini AI ile derinlemesine analiz eder.
+
+/fotosint <fotograf>
+  Kullanim/Test: /cografi-osint fotosint — Bir fotograf yukleyin. Google Lens (SerpAPI) + AI analizi ile fotograftaki kisi/yer tespiti yapar.
+  Ne ise yarar: Google Lens ve AI gorsel analizi birlestirerek fotograftaki kisi/yer tespiti yapar.
+
+/yer-bul <fotograf>
+  Kullanim/Test: /cografi-osint yer-bul — Bir fotograf yukleyin. AI ile sehir, ulke, mekan, iklim ve mimari tarz ipuclari cikarir.
+  Ne ise yarar: Fotograftaki mekani AI ile tahmin edip sehir, ulke, iklim ve mimari ipuclari verir.
+
+/yuz-tanima <fotograf>
+  Kullanim/Test: /cografi-osint yuz-tanima — Bir fotograf yukleyin. AI ile yas, cinsiyet, ten rengi, sac rengi ve unlu benzerligi tahmini yapar.
+  Ne ise yarar: Fotograftaki yuzleri AI ile analiz edip cinsiyet, yas, fiziksel ozellikler ve unlu benzerligi tahmin eder.
+
+/logo-tara <fotograf>
+  Kullanim/Test: /cografi-osint logo-tara — Bir logo fotografi yukleyin. AI ile marka, sirket, kurulus ve sektor tespiti yapar.
+  Ne ise yarar: Fotograftaki logonun hangi marka/kurulusa ait oldugunu AI ile tespit eder.
+
+/harita-karsilastir <koordinat1> <koordinat2>
+  Kullanim/Test: /cografi-osint harita-karsilastir koordinat1:41.0082,28.9784 koordinat2:39.9334,32.8597 — Iki koordinat arasi mesafe hesaplar ve Google Maps linkleri verir.
+  Ne ise yarar: Iki GPS koordinati arasindaki Haversine mesafesini hesaplar ve harita linkleri verir.
+
+/koordinat-coz <koordinat>
+  Kullanim/Test: /cografi-osint koordinat-coz koordinat:41.0082,28.9784 — OpenStreetMap Nominatim ile ters geocoding yapip adres bilgisi cikarir.
+  Ne ise yarar: GPS koordinatini adrese cevirir (ters geocoding) ve Google Maps linki verir.
+
+/maps-tara <sorgu>
+  Kullanim/Test: /cografi-osint maps-tara sorgu:Istanbul Taksim Meydani — OpenStreetMap Nominatim ile yer aramasi yapar; en fazla 3 sonucu harita linkleriyle gosterir.
+  Ne ise yarar: OpenStreetMap'te yer adi aramasi yapip konumlari Google Maps linkleriyle gosterir.
+
+/drone-haritasi <koordinat>
+  Kullanim/Test: /cografi-osint drone-haritasi koordinat:41.0082,28.9784 — Bolge bilgisi (ulke, sehir) + standart, uydu ve drone zoom seviyesinde harita linkleri verir.
+  Ne ise yarar: Koordinatin bulundugu bolgeyi Google Maps'te standart, uydu ve yakinlastirilmis (drone) goruntu linkleriyle gosterir.
+
+/wifi-harita <koordinat>
+  Kullanim/Test: /cografi-osint wifi-harita koordinat:41.0082,28.9784 — Wigle.net, OpenWiFiMap ve Wigle API uzerinden bolgedeki WiFi ag haritasi linkleri verir.
+  Ne ise yarar: Belirtilen koordinattaki WiFi aglarini Wigle.net ve OpenWiFiMap uzerinden haritalandirmak icin linkler verir.
+
+/kule-ucgenle <cellid> <lac> <mcc> <mnc>
+  Kullanim/Test: /cografi-osint kule-ucgenle cellid:12345 lac:6789 mcc:286 mnc:01 — Baz istasyonu verileriyle OpenCellID, UnwiredLabs, MLS API linkleri ve konum ucgenlemesi.
+  Ne ise yarar: GSM baz istasyonu verilerinden (cellid/lac/mcc/mnc) konum ucgenlemesi icin API linkleri olusturur.
+
+/uydu-canli <koordinat>
+  Kullanim/Test: /cografi-osint uydu-canli koordinat:41.0082,28.9784 — Sentinel Hub, NASA Worldview, Google Earth Engine, Copernicus canli uydu goruntu linkleri.
+  Ne ise yarar: Belirtilen koordinat icin Sentinel-2, Landsat ve Copernicus canli uydu goruntu platformu linklerini verir.
+
+/termal-harita <koordinat>
+  Kullanim/Test: /cografi-osint termal-harita koordinat:41.0082,28.9784 — NASA FIRMS yangin haritasi + Landsat termal bant + MODIS LST + ECOSTRESS linkleri.
+  Ne ise yarar: Koordinat bolgesindeki termal/kizilotesi uydu goruntuleri (yangin, isi adasi, yuzey sicakligi) icin platform linkleri verir.
+
+/sel-baskin <koordinat>
+  Kullanim/Test: /cografi-osint sel-baskin koordinat:41.0082,28.9784 — Yukseklik verisi + yakin su kaynaklari + Global Flood Database risk degerlendirmesi yapar.
+  Ne ise yarar: Belirtilen koordinat icin yukseklik, yakin su kaynaklari ve sel risk haritasi linkleriyle risk analizi yapar.
+
+
+======================================================================
+  KANSER COOKIES - /cookies
+======================================================================
+
+/oturum-cal <url>
+  Kullanim/Test: /cookies oturum-cal url:https://example.com — Set-Cookie header analizi (HttpOnly/Secure/SameSite) + session token kalibi tespiti + calma yontemleri.
+  Ne ise yarar: Session cookie guvenligini HttpOnly, Secure, SameSite flag'leriyle analiz edip oturum calma yontemlerini listeler.
+
+/xss-cookie <url> [param]
+  Kullanim/Test: /cookies xss-cookie url:https://example.com/search param:q — 10 XSS payloadu gonderip document.cookie calma senaryolu yansiyan XSS taramasi.
+  Ne ise yarar: XSS ile cookie calma odakli 10 payload taramasi ve exploit kodu uretir.
+
+/csrf-cookie <url>
+  Kullanim/Test: /cookies csrf-cookie url:https://example.com — SameSite cookie + form CSRF token + anti-CSRF header + sahte Origin testi yapar.
+  Ne ise yarar: CSRF korumasini SameSite cookie, form token, Origin header ve anti-CSRF header'larla kapsamli analiz eder.
+
+/sql-cookie <url> [param]
+  Kullanim/Test: /cookies sql-cookie url:https://example.com/page param:id — 8 SQLi payloadu (union, error, blind, time, stacked) ile session cookie calma odakli tarama.
+  Ne ise yarar: SQLi ile session token calma zinciri odakli 8 SQL payloadu taramasi yapar.
+
+/kimlik-avi <url> [marka]
+  Kullanim/Test: /cookies kimlik-avi url:https://example.com marka:Google — Login formu tespiti, phishing gostergeleri (TLD, HTTPS), cookie calma senaryosu analizi.
+  Ne ise yarar: Phishing sayfasi analizi; login formu, supheli TLD, HTTPS durumu ve cookie calma senaryosu kontrolu yapar.
+
+/yol-gecis <domain>
+  Kullanim/Test: /cookies yol-gecis domain:https://example.com — 10 path traversal payloadu ile dosya okuma + cookie dosyasi konumlari listesi.
+  Ne ise yarar: Path traversal zafiyet taramasi + tarayici cookie dosya konumlarini (Chrome, Firefox, Safari) listeler.
+
+/clickjack-cookie <url>
+  Kullanim/Test: /cookies clickjack-cookie url:https://example.com — XFO/CSP kontrolu + clickjacking cookie calma senaryosu + iframe test kodu uretir.
+  Ne ise yarar: Clickjacking zafiyetinde cookie calma senaryosu; X-Frame-Options + iframe test kodu ile analiz.
+
+/acik-yonlendirme <url>
+  Kullanim/Test: /cookies acik-yonlendirme url:https://example.com — 10 redirect parametresinde open redirect testi + cookie calma zinciri senaryosu.
+  Ne ise yarar: Open redirect zafiyeti taramasi ve acik yonlendirme uzerinden cookie calma senaryosu olusturur.
+
+/komut-enjeksiyon <url>
+  Kullanim/Test: /cookies komut-enjeksiyon url:https://example.com/page?cmd=whoami — 10 komut enjeksiyon payloadu + Linux/Windows cookie calma komutlari uretir.
+  Ne ise yarar: Komut enjeksiyonu zafiyeti tarar ve cookie calma icin curl/powershell komutlari olusturur.
+
+/ddos-cookie <hedef> [sure] [metod]
+  Kullanim/Test: /cookies ddos-cookie hedef:example.com sure:5 metod:GET — 5 saniye boyunca 15'li paralel HTTP istegi + cookie tabanli DDoS senaryosu.
+  Ne ise yarar: Stres testi + cookie tabanli DDoS senaryosu (session cookie ile authenticate olup flood).
+
+/cookie-manipule <url>
+  Kullanim/Test: /cookies cookie-manipule url:https://example.com — admin=true, role=admin gibi 6 cookie manipülasyonu + privilege escalation adimlari.
+  Ne ise yarar: Cookie manipülasyonuyla yetki yukseltme (privilege escalation) testi ve exploit adimlari.
+
+/session-fixation <url>
+  Kullanim/Test: /cookies session-fixation url:https://example.com — Session cookie tespiti + sabit session atama + PHPSESSID URL testi + saldiri senaryosu.
+  Ne ise yarar: Session fixation zafiyeti analizi; session token tespiti ve saldiri senaryosu olusturur.
+
+/jwt-kir-cookie <token>
+  Kullanim/Test: /cookies jwt-kir-cookie token:eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4ifQ.abc — JWT decode + none algoritma kontrolu + 30 zayif secret testi + hashcat komutlari.
+  Ne ise yarar: JWT kapsamli analiz; alg:none kontrolu, zayif secret testi, cookie olarak kullanim ve hashcat/john komutlari.
+
+/cookie-zehirle <url>
+  Kullanim/Test: /cookies cookie-zehirle url:https://example.com — CRLF, semicolon, null byte gibi 10 ozel karakter cookie enjeksiyonu + parametre poisoning.
+  Ne ise yarar: Cookie poisoning/zafiyet testi; ozel karakter enjeksiyonu ve Set-Cookie manipülasyonu taramasi.
+
+/cors-cookie <url>
+  Kullanim/Test: /cookies cors-cookie url:https://example.com — 5 farkli origin ile CORS cookie calma testi + Access-Control-Allow-Credentials kontrolu.
+  Ne ise yarar: CORS zafiyetinde credential'li cookie calma testi; ACAO ve ACAC header analizi + exploit kodu.
+
+/crlf-cookie <url>
+  Kullanim/Test: /cookies crlf-cookie url:https://example.com — 6 CRLF varyasyonuyla Set-Cookie enjeksiyonu + 7 parametrede Response Splitting testi.
+  Ne ise yarar: CRLF Injection ile Set-Cookie enjeksiyonu, response splitting ve cache poisoning testi.
+
+/subdomain-cookie <domain>
+  Kullanim/Test: /cookies subdomain-cookie domain:https://example.com — Domain cookie atribute analizi + subdomain hijacking cookie calma senaryosu.
+  Ne ise yarar: Domain cookie atribute'u ile subdomain cookie hijacking riski ve __Host- prefix onerileri.
+
+/cookie-bomb <url>
+  Kullanim/Test: /cookies cookie-bomb url:https://example.com — 500-6000 karakter boyutlarinda cookie gonderip sunucu overflow limitini tespit eder.
+  Ne ise yarar: Cookie overflow/bomb testi; sunucunun maksimum cookie boyutu limitini ve subdomain bomb etkisini olcer.
+
+/httponly-bypass <url>
+  Kullanim/Test: /cookies httponly-bypass url:https://example.com — TRACE metodu + 15 debug endpoint (phpinfo, actuator, .env) taramasiyla HttpOnly atlatma.
+  Ne ise yarar: TRACE metodu ve debug endpoint'leri uzerinden HttpOnly cookie korumasini atlatma testi.
+
+/samesite-bypass <url>
+  Kullanim/Test: /cookies samesite-bypass url:https://example.com — Popup window, form POST, 302 redirect, sibling subdomain gibi SameSite bypass teknikleri.
+  Ne ise yarar: SameSite Strict/Lax bypass tekniklerini aciklar (popup, form POST, redirect zinciri, subdomain injection).
+
+/localstorage-avla <url>
+  Kullanim/Test: /cookies localstorage-avla url:https://example.com — HTML + harici JS'lerde localStorage/sessionStorage token, API key, JWT pattern taramasi.
+  Ne ise yarar: Sayfa ve JS dosyalarinda localStorage/sessionStorage'da saklanan token ve API key'leri tarar.
+
+/websocket-cookie <url>
+  Kullanim/Test: /cookies websocket-cookie url:https://example.com — WebSocket endpoint tespiti + CSWSH (Cross-Site WebSocket Hijacking) testi + exploit kodu.
+  Ne ise yarar: WebSocket baglantilarinda cookie hijacking ve Cross-Site WebSocket Hijacking zafiyet analizi.
+
+/cache-zehirle <url>
+  Kullanim/Test: /cookies cache-zehirle url:https://example.com — X-Forwarded-Host enjeksiyonuyla cache poisoning + cookie calma exploit zinciri testi.
+  Ne ise yarar: Web cache poisoning ile X-Forwarded-Host manipülasyonu ve zehirli JS uzerinden cookie calma testi.
+
+/cookie-replay <cookie>
+  Kullanim/Test: /cookies cookie-replay cookie:"session=abc123; user=admin" — Cookie parse + token formati (JWT/MD5/Base64) analizi + replay curl komutlari.
+  Ne ise yarar: Calinmis cookie'nin yapisini analiz edip replay saldirisi icin curl komutlari ve session yasam suresi testi.
+
+/browser-finger <url>
+  Kullanim/Test: /cookies browser-finger url:https://example.com — FingerprintJS, canvas, WebGL, AudioContext, font gibi 5 kategoride parmak izi taramasi.
+  Ne ise yarar: Sitedeki browser fingerprinting kutuphane ve tekniklerini (canvas, WebGL, audio) kapsamli tarar.
+
+
+======================================================================
+  HABER - /haber
+======================================================================
+
+/haber <icerik>
+  Kullanim/Test: /haber icerik:Buyuk Ikramiye 500 Milyon TL! — Belirlenen kanala manset gorseli olusturup yorum thread'iyle birlikte gonderir.
+  Ne ise yarar: Magazin rolune sahip kullanicilarin manset haberi olusturup ozel kanalda yayinlamasini saglar (ozel rol gerektirir).

@@ -1,0 +1,15 @@
+**👁️ GÖZETİM BOTU — KOMUT REHBERİ**
+*(Hedefleri sürekli izler, değişiklikleri raporlar)*
+
+➤ **/canli-takip** → IP/Domain/kullanıcıyı izle, değişince DM at
+➤ **/alan-izle** → Domain süresi/DNS değişikliklerini izle
+➤ **/sizinti-alarm** → E-posta/kullanıcı adını sürekli sızıntılarda tara
+➤ **/hedef-izle** → Kişinin tüm public aktivitelerini takip et
+➤ **/hedef-dosya** → Tek komutla hedef hakkında kapsamlı rapor
+➤ **/karsilastir** → İki hedefi karşılaştır, ortak noktaları bul
+➤ **/network-graf** → Ağ bağlantılarını grafikle göster
+➤ **/zaman-sirasi** → Aktivite kronolojisini çıkar
+➤ **/exif-toplu** → Toplu fotoğraf EXIF analizi
+➤ **/metadata-oku** → Dosyadaki gizli bilgileri çıkar
+➤ **/hash-dogrula** → Dosyanın parmak izini (hash) hesapla
+➤ **/ekran-arsiv** → Sayfanın fotoğrafı + kaynak kodları

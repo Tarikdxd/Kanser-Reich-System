@@ -1,0 +1,12 @@
+**🗺️ COĞRAFİ OSINT BOTU — KOMUT REHBERİ**
+*(Fotoğraflardan konum/mekan tespiti)*
+
+➤ **/fotosint** → Fotoğrafı analiz et, kim/neresi tahmin et
+➤ **/exif-derin** → Fotoğrafın AI ile derin analizi (cihaz, ortam)
+➤ **/yer-bul** → Fotoğraftaki mekanı ve konumu tahmin et
+➤ **/yuz-tanima** → Yüz analizi, benzer profil ara
+➤ **/logo-tara** → Fotoğraftaki logonun markasını bul
+➤ **/harita-karsilastir** → İki koordinat arası mesafe/rota
+➤ **/koordinat-coz** → Koordinatı adrese çevir
+➤ **/maps-tara** → Google Maps'te mekan/İşletme ara
+➤ **/drone-haritasi** → Bölgenin uydu görüntüsü

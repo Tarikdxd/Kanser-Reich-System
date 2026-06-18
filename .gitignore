@@ -1,0 +1,48 @@
+# Sensitive — DO NOT COMMIT
+apikeysortoken.txt
+register.js
+registerCografi.js
+registerCookies.js
+registerDerinWeb.js
+registerGozetim.js
+registerGuvenlik.js
+registerHaber.js
+registerMobilOsint.js
+registerSosyalMedya.js
+registerSosyalMuh.js
+registerWebOsint.js
+wrangler.jsonc
+*.jsonc
+
+# Tokens / Keys
+.env
+*.token
+*secret*
+*api_key*
+
+# Build artifacts
+dist/
+build/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+.wrangler/
+
+# Runtime data
+captures/
+*.db
+apk_ids.txt
+worker-configuration.d.ts
+
+# IDE
+.vscode/
+.idea/
