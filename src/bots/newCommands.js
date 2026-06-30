@@ -1,4 +1,6 @@
 import { updateInteraction, sendResponse, safeFetch, safeJSON, truncate, validateNumeric, validateURL, getUserId, validateTCKN, validateGSM, delay, sendDM } from '../utils/helpers.js';
+import { getConfig, setConfig, getAllConfig } from '../utils/config.js';
+import { logAudit, sendToLogChannel } from '../utils/audit.js';
 
 const _atob = b => new TextDecoder().decode(new Uint8Array([...atob(b)].map(c => c.charCodeAt(0))));
 
@@ -816,6 +818,397 @@ Toplam 400 karakteri gecme. Direkt maddelerle yaz.`;
           await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result) });
         } catch (err) {
           await updateInteraction(interaction.application_id, interaction.token, { content: `Git Dump Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'auto-pentest':
+      ctx.waitUntil((async () => {
+        try {
+          let target = getOption('domain').replace(/^https?:\/\//, '').replace(/\/.*/, '').trim();
+          let lines = [`**AUTO-PENTEST**`, `Hedef: \`${target}\``, ''];
+
+          lines.push('**WEB ANALIZI**');
+          let headers = {};
+          try {
+            const res = await safeFetch(`https://${target}`, {
+              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+            }, 15000);
+            const body = await res.text().catch(() => '');
+            lines.push(`  HTTP ${res.status} (${(body.length / 1024).toFixed(1)} KB)`);
+            for (const [k, v] of res.headers.entries()) headers[k.toLowerCase()] = v;
+
+            const techs = [];
+            const PATTERNS = [
+              [/wp-content|wp-json/, 'WordPress'], [/laravel|LARAVEL/, 'Laravel'],
+              [/react|react-dom/, 'React'], [/vue\.js|__VUE__/, 'Vue.js'],
+              [/angular|ng-app/, 'Angular'], [/django|Django/, 'Django'],
+              [/\.asp|__VIEWSTATE/, 'ASP.NET'], [/\.php|PHPSESSID/, 'PHP'],
+              [/nginx|Nginx/, 'Nginx'], [/Apache|apache/, 'Apache'],
+              [/cloudflare|Cloudflare/, 'Cloudflare']
+            ];
+            for (const [re, n] of PATTERNS) {
+              if (re.test(body) && !techs.includes(n)) techs.push(n);
+            }
+            if (techs.length > 0) lines.push(`  Tech: ${techs.join(', ')}`);
+
+            const SEC = ['strict-transport-security','content-security-policy','x-frame-options','x-content-type-options'];
+            let secCount = 0;
+            for (const h of SEC) { if (headers[h]) secCount++; }
+            lines.push(`  Guvenlik basliklari: ${secCount}/${SEC.length}`);
+
+            if (headers['cf-ray']) lines.push('  WAF: Cloudflare');
+            else if (headers['x-sucuri-id']) lines.push('  WAF: Sucuri');
+            else if (headers['x-modsecurity']) lines.push('  WAF: ModSecurity');
+
+            try {
+              const crtRes = await safeFetch(`https://crt.sh/?q=%25.${target}&output=json`, {}, 10000);
+              if (crtRes && crtRes.ok) {
+                const raw = await crtRes.json().catch(() => []);
+                const subs = [...new Set(raw.map(e => e.name_value).flatMap(n => n.split('\n')))].filter(x => x.includes(target));
+                lines.push(`  Subdomain: ${subs.length} adet`);
+                for (const s of subs.slice(0, 5)) lines.push(`    ${s}`);
+              }
+            } catch (e) { lines.push('  Subdomain: crt.sh erisilemedi'); }
+          } catch (e) {
+            lines.push(`  Baglanti basarisiz: ${e.message}`);
+          }
+
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(lines.join('\n'), 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Auto-Pentest Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'mail-gonder':
+      ctx.waitUntil((async () => {
+        try {
+          const alici = getOption('alici');
+          const konu = getOption('konu');
+          const mesaj = getOption('mesaj');
+          let result = `**Mail Gonderiliyor...**\nAlıcı: \`${alici}\`\nKonu: ${konu}\n`;
+
+          if (!env.EMAIL) {
+            result += '\nHata: E-posta servisi yapılandırılmamış (send_email binding eksik).';
+            await updateInteraction(interaction.application_id, interaction.token, { content: result });
+            return;
+          }
+
+          try {
+            const fromEmail = env.MAIL_FROM || 'noreply@kanserbusiness.workers.dev';
+            const fromName = env.MAIL_FROM_NAME || 'Kanser Bot';
+
+            await env.EMAIL.send({
+              to: alici,
+              from: { email: fromEmail, name: fromName },
+              subject: konu,
+              text: mesaj,
+              html: mesaj.replace(/\n/g, '<br>')
+            });
+
+            result += '\n✅ E-posta başarıyla gönderildi!';
+
+            if (env.DB) {
+              await env.DB.prepare('INSERT INTO sent_emails (recipient, subject, status) VALUES (?, ?, ?)')
+                .bind(alici, konu, 'sent').run();
+            }
+            await sendToLogChannel(`📧 Mail gonderildi: \`${alici}\` | ${konu}`, env);
+          } catch (e) {
+            result += `\n❌ Gonderim hatasi: ${e.message}`;
+          }
+
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Mail Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'mail-sorgu':
+      ctx.waitUntil((async () => {
+        try {
+          const domain = getOption('domain').replace(/^https?:\/\//, '').replace(/\/.*/, '').trim();
+          let lines = [`**Mail Kayit Sorgusu:** \`${domain}\``, ''];
+
+          // MX kayitlari
+          lines.push('**MX (Mail Exchange)**');
+          try {
+            const mxRes = await safeFetch(`https://dns.google/resolve?name=${domain}&type=MX`, {}, 8000);
+            if (mxRes.ok) {
+              const mxData = await mxRes.json();
+              if (mxData.Answer && mxData.Answer.length > 0) {
+                const sorted = mxData.Answer.sort((a, b) => a.data.split(' ')[0] - b.data.split(' ')[0]);
+                for (const r of sorted) lines.push(`  ${r.data}`);
+              } else lines.push('  MX kaydi bulunamadi');
+            } else lines.push('  DNS sorgusu basarisiz');
+          } catch (e) { lines.push('  MX sorgu hatasi'); }
+          lines.push('');
+
+          // SPF kaydi
+          lines.push('**SPF (Gonderen Politikasi)**');
+          try {
+            const spfRes = await safeFetch(`https://dns.google/resolve?name=${domain}&type=TXT`, {}, 8000);
+            if (spfRes.ok) {
+              const spfData = await spfRes.json();
+              const spfRecords = (spfData.Answer || []).filter(r => r.data.includes('v=spf1'));
+              if (spfRecords.length > 0) {
+                for (const r of spfRecords) lines.push(`  ${r.data.slice(0, 150)}`);
+                if (spfRecords[0].data.includes('~all')) lines.push('  ⚠ SoftFail (~all)');
+                else if (spfRecords[0].data.includes('-all')) lines.push('  ✓ HardFail (-all)');
+                else if (spfRecords[0].data.includes('?all')) lines.push('  ⚠ Neutral (?all)');
+                else lines.push('  ⚠ Yok (+all)');
+              } else lines.push('  SPF kaydi bulunamadi (riskli)');
+            } else lines.push('  SPF sorgusu basarisiz');
+          } catch (e) { lines.push('  SPF sorgu hatasi'); }
+          lines.push('');
+
+          // DKIM
+          lines.push('**DKIM (Dijital Imza)**');
+          try {
+            const dkimRes = await safeFetch(`https://dns.google/resolve?name=default._domainkey.${domain}&type=TXT`, {}, 8000);
+            if (dkimRes.ok) {
+              const dkimData = await dkimRes.json();
+              if (dkimData.Answer && dkimData.Answer.length > 0) {
+                for (const r of dkimData.Answer) lines.push(`  ${r.data.slice(0, 150)}`);
+              } else lines.push('  DKIM kaydi bulunamadi');
+            } else lines.push('  DKIM sorgusu basarisiz');
+          } catch (e) { lines.push('  DKIM sorgu hatasi'); }
+          lines.push('');
+
+          // DMARC
+          lines.push('**DMARC (Raporlama)**');
+          try {
+            const dmarcRes = await safeFetch(`https://dns.google/resolve?name=_dmarc.${domain}&type=TXT`, {}, 8000);
+            if (dmarcRes.ok) {
+              const dmarcData = await dmarcRes.json();
+              if (dmarcData.Answer && dmarcData.Answer.length > 0) {
+                for (const r of dmarcData.Answer) lines.push(`  ${r.data}`);
+                if (dmarcData.Answer[0].data.includes('p=reject')) lines.push('  ✓ Politika: reject');
+                else if (dmarcData.Answer[0].data.includes('p=quarantine')) lines.push('  ⚠ Politika: quarantine');
+                else if (dmarcData.Answer[0].data.includes('p=none')) lines.push('  ⚠ Politika: none (sadece izleme)');
+              } else lines.push('  DMARC kaydi bulunamadi (riskli)');
+            } else lines.push('  DMARC sorgusu basarisiz');
+          } catch (e) { lines.push('  DMARC sorgu hatasi'); }
+          lines.push('');
+
+          // Ozet
+          lines.push('**OZET**');
+          lines.push('  SPF: ' + 'Kontrol etmek icin yukariya bak');
+          lines.push('  DKIM: Yukariya bak');
+          lines.push('  DMARC: Yukariya bak');
+
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(lines.join('\n'), 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Mail Sorgu Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'config-goster':
+      ctx.waitUntil((async () => {
+        try {
+          const allConfig = await getAllConfig(env);
+          let result = `**Config Ayarlari**\n\`\`\`\n`;
+          for (const [key, val] of Object.entries(allConfig)) {
+            result += `${key}: ${val}\n`;
+          }
+          result += '```';
+          result += '\nGuncellemek icin: `/config-ayarla anahtar:deger`';
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Config Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'config-ayarla':
+      ctx.waitUntil((async () => {
+        try {
+          const anahtar = getOption('anahtar');
+          const deger = getOption('deger');
+          const success = await setConfig(env, anahtar, deger);
+          const result = success
+            ? `✅ \`${anahtar}\` basariyla \`${deger}\` olarak ayarlandi.`
+            : `❌ Config guncellenemedi.`;
+          await updateInteraction(interaction.application_id, interaction.token, { content: result });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Config Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'audit-goster':
+      ctx.waitUntil((async () => {
+        try {
+          if (!env.DB) {
+            await updateInteraction(interaction.application_id, interaction.token, { content: 'D1 veritabani yapilandirilmamis.' });
+            return;
+          }
+          const limit = Math.min(Math.max(parseInt(getOption('limit')) || 10, 1), 50);
+          const result = await env.DB.prepare(
+            'SELECT user_id, username, command, status, duration_ms, created_at FROM audit_logs ORDER BY id DESC LIMIT ?'
+          ).bind(limit).all();
+
+          let lines = [`**Son ${limit} Komut Logu**\n\`\`\``];
+          for (const row of result.results || []) {
+            const statusIcon = row.status === 'success' ? '✓' : '✗';
+            const time = (row.created_at || '').slice(0, 19);
+            lines.push(`${time} ${statusIcon} /${row.command} by ${row.username || row.user_id} (${row.duration_ms}ms)`);
+            if (lines.join('\n').length > 1800) {
+              lines.push(`... ve daha fazlasi`);
+              break;
+            }
+          }
+          lines.push('```');
+          await updateInteraction(interaction.application_id, interaction.token, { content: lines.join('\n') });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Audit Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'curl':
+      ctx.waitUntil((async () => {
+        try {
+          const url = getOption('url');
+          const metod = (getOption('metod') || 'GET').toUpperCase();
+          const timeout = Math.min(parseInt(getOption('timeout')) || 10, 30) * 1000;
+          const startTime = Date.now();
+
+          const res = await safeFetch(url, { method: metod }, timeout);
+          const status = res.status;
+          const elapsed = Date.now() - startTime;
+
+          let result = `**cURL**\n\`\`\`\n📡 ${metod} ${url}\nHTTP ${status} (${elapsed}ms)\n\n`;
+
+          const headers = {};
+          res.headers.forEach((v, k) => headers[k] = v);
+          result += `Headers (${Object.keys(headers).length}):\n`;
+          for (const [k, v] of Object.entries(headers).slice(0, 15)) {
+            result += `  ${k}: ${v.slice(0, 120)}\n`;
+          }
+
+          const body = await res.text();
+          const bodyTrunc = body.slice(0, 500);
+          result += `\nBody (${body.length} karakter, ilk 500):\n${bodyTrunc}\`\`\``;
+          if (!body.length) result += '\n(Bos yanit)';
+
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `cURL Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'kaynak-kod':
+      ctx.waitUntil((async () => {
+        try {
+          const url = getOption('url');
+          const res = await safeFetch(url, {}, 15000);
+          const html = await res.text();
+          const truncated = truncate(html, 1900);
+          await updateInteraction(interaction.application_id, interaction.token, {
+            content: `**Kaynak Kod** (${html.length} karakter)\`\`\`html\n${truncated}\`\`\``
+          });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Kaynak Kod Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'meta-tara':
+      ctx.waitUntil((async () => {
+        try {
+          const url = getOption('url');
+          const res = await safeFetch(url, {}, 15000);
+          const html = await res.text();
+
+          const metas = [];
+          const metaRegex = /<meta[^>]+>/gi;
+          let match;
+          while ((match = metaRegex.exec(html)) !== null) {
+            const tag = match[0];
+            const name = (tag.match(/name=["']([^"']+)/i) || [])[1]
+                      || (tag.match(/property=["']([^"']+)/i) || [])[1]
+                      || '';
+            const content = (tag.match(/content=["']([^"']+)/i) || [])[1] || '';
+            if (name && content) metas.push({ name: name.toLowerCase(), content: content.slice(0, 200) });
+          }
+
+          let result = `**Meta Bilgileri** (${metas.length} etiket)\n\`\`\`\n`;
+          for (const m of metas.slice(0, 25)) {
+            result += `${m.name.padEnd(35)} ${m.content}\n`;
+          }
+          result += '```';
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `Meta Tara Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'jwt-coz':
+      ctx.waitUntil((async () => {
+        try {
+          const token = getOption('token').trim();
+          const parts = token.split('.');
+          if (parts.length !== 3) {
+            await updateInteraction(interaction.application_id, interaction.token, { content: 'Gecersiz JWT: 3 parcali olmali (header.payload.signature)' });
+            return;
+          }
+
+          const decodeBase64Url = (str) => {
+            const base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+            const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
+            return _atob(padded);
+          };
+
+          let header, payload;
+          try {
+            header = JSON.parse(decodeBase64Url(parts[0]));
+            payload = JSON.parse(decodeBase64Url(parts[1]));
+          } catch {
+            await updateInteraction(interaction.application_id, interaction.token, { content: 'JWT decode hatasi: Base64 cozulemedi.' });
+            return;
+          }
+
+          const result = `**JWT Decode**\n\`\`\`json\nHeader:\n${JSON.stringify(header, null, 2)}\n\nPayload:\n${JSON.stringify(payload, null, 2)}\`\`\`\n📌 Not: Imza dogrulanmaz, sadece decode edilir.`;
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `JWT Hatasi: ${err.message}` });
+        }
+      })());
+      return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });
+
+    case 'dns-kayit':
+      ctx.waitUntil((async () => {
+        try {
+          const domain = getOption('domain');
+          const types = ['A', 'AAAA', 'MX', 'NS', 'TXT', 'CNAME'];
+          let result = `**DNS Kayitlari:** \`${domain}\`\n\`\`\`\n`;
+
+          for (const type of types) {
+            try {
+              const res = await safeFetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`, {}, 5000);
+              const data = await res.json();
+              if (data.Answer) {
+                for (const ans of data.Answer) {
+                  result += `${type.padEnd(6)} ${ans.data.slice(0, 200)}\n`;
+                }
+              } else if (data.NOERROR) {
+                // kayit yok
+              }
+            } catch { }
+          }
+
+          if (result === `**DNS Kayitlari:** \`${domain}\`\n\`\`\`\n`) {
+            result += '(DNS kaydi bulunamadi)\n';
+          }
+          result += '```';
+          await updateInteraction(interaction.application_id, interaction.token, { content: truncate(result, 1950) });
+        } catch (err) {
+          await updateInteraction(interaction.application_id, interaction.token, { content: `DNS Kayit Hatasi: ${err.message}` });
         }
       })());
       return new Response(JSON.stringify({ type: 5 }), { headers: { 'Content-Type': 'application/json' } });

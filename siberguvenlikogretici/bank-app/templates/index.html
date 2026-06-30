@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanser Bank - Guvenli Bankacilik</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>KANSER <span>BANK</span></h1>
+        <nav><a href="/">Ana Sayfa</a></nav>
+    </header>
+    <div class="container">
+        <div class="site-mesaji" id="siteMesaji">{{ site_mesaji }}</div>
+
+        <div style="display: flex; gap: 40px; align-items: flex-start; margin-top: 40px;">
+            <div style="flex: 1;">
+                <div class="card">
+                    <h2>Musteri Girisi</h2>
+                    {% if mesaj %}
+                    <div class="hata">{{ mesaj }}</div>
+                    {% endif %}
+                    <form method="POST" action="/">
+                        <div class="form-group">
+                            <label>Kullanici Adi</label>
+                            <input type="text" name="username" placeholder="ornek: ahmet" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sifre</label>
+                            <input type="password" name="password" placeholder="ornek: 123456" required>
+                        </div>
+                        <button type="submit" class="btn">Giris Yap</button>
+                    </form>
+                    <div class="aciklama" style="margin-top: 20px;">
+                        <strong>[EGITIM]</strong> Test kullanicilari: ahmet/123456, mehmet/123456, tarikdxd/tarik123
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <div class="card">
+                    <h2>Neden Kanser Bank?</h2>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>%100 Online Bankacilik</li>
+                        <li>Aninda Havale / EFT</li>
+                        <li>Guvenli Altyapi (sizce?)</li>
+                        <li>7/24 Musteri Hizmetleri</li>
+                    </ul>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <h2>Hizmetlerimiz</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="background:#0d1b3e; padding:15px; border-radius:8px; text-align:center;">
+                            <div style="font-size:24px;">&#x1F4B0;</div>
+                            <div>Havale</div>
+                        </div>
+                        <div style="background:#0d1b3e; padding:15px; border-radius:8px; text-align:center;">
+                            <div style="font-size:24px;">&#x1F4C4;</div>
+                            <div>Fatura</div>
+                        </div>
+                        <div style="background:#0d1b3e; padding:15px; border-radius:8px; text-align:center;">
+                            <div style="font-size:24px;">&#x1F50D;</div>
+                            <div>Kredi</div>
+                        </div>
+                        <div style="background:#0d1b3e; padding:15px; border-radius:8px; text-align:center;">
+                            <div style="font-size:24px;">&#x1F511;</div>
+                            <div>Yatirim</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>&copy; 2024 Kanser Bank. Bu site egitim amaciyla hazirlanmistir.</footer>
+</body>
+</html>

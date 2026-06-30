@@ -1,16 +1,49 @@
-import { delay, clearTurkishChars, hexToBuf, updateInteraction, sendResponse, safeFetch, safeJSON, truncate, validateTCKN, validateNumeric, validateEmail, validateURL, getUserId, getAttachmentUrl, sendDM } from '../utils/helpers.js';
+import { CONFIG, delay, clearTurkishChars, hexToBuf, updateInteraction, sendResponse, safeFetch, safeJSON, truncate, validateTCKN, validateNumeric, validateEmail, validateURL, getUserId, getAttachmentUrl, sendDM } from '../utils/helpers.js';
 import { handleNewCommand } from './newCommands.js';
+import { getHelpEmbed, createCategorySelect } from './helpMenu.js';
 
 export async function handleKanserBot(interaction, request, env, ctx, url) {
   if (interaction.type === 1) return new Response(JSON.stringify({ type: 1 }), { headers: { 'Content-Type': 'application/json' } });
+
+  // Mesaj bilesen etkilesimleri (dropdown/button)
+  if (interaction.type === 3) {
+    if (interaction.data.custom_id === 'yardim_category') {
+      const selected = interaction.data.values?.[0] || 'yapay-zeka';
+      const content = getHelpEmbed(selected);
+      const components = [createCategorySelect(selected)];
+      return new Response(JSON.stringify({
+        type: 7,
+        data: { content, components }
+      }), { headers: { 'Content-Type': 'application/json' } });
+    }
+    return sendResponse('Bilinmeyen bilesen.', true);
+  }
 
   if (interaction.type === 2) {
     const { name, options } = interaction.data;
     const getOption = (optName) => options?.find(o => o.name === optName)?.value;
 
+    // Yardim komutu herkese acik
+    if (name === 'yardim') {
+      const initialCat = 'yapay-zeka';
+      const content = getHelpEmbed(initialCat);
+      const components = [createCategorySelect(initialCat)];
+      return new Response(JSON.stringify({
+        type: 4,
+        data: { content, components }
+      }), { headers: { 'Content-Type': 'application/json' } });
+    }
+
     const userPermissions = BigInt(interaction.member?.permissions || "0");
     const ADMINISTRATOR_FLAG = BigInt(8);
-    if ((userPermissions & ADMINISTRATOR_FLAG) !== ADMINISTRATOR_FLAG) {
+    const hasAdmin = (userPermissions & ADMINISTRATOR_FLAG) === ADMINISTRATOR_FLAG;
+
+    if (name === 'kanser-sorgu') {
+      const userRoles = interaction.member?.roles || [];
+      if (!hasAdmin && !userRoles.includes(CONFIG.KANSER_SORGU_ROLE_ID)) {
+        return sendResponse("Hata: Bu komutu kullanmak icin Yonetici veya ozel role sahip olmaniz gerekmektedir.", true);
+      }
+    } else if (!hasAdmin) {
       return sendResponse("Hata: Bu komutu kullanmak icin sunucuda Yonetici yetkisine sahip olmaniz gerekmektedir.", true);
     }
 

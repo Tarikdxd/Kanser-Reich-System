@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanser Bank - Admin Paneli</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>KANSER <span>BANK</span></h1>
+        <nav>
+            <a href="/dashboard">Hesabim</a>
+            <a href="/transfer">Havale</a>
+            <a href="/admin">Admin</a>
+            <a href="/logout">Cikis</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="aciklama" style="margin-top: 20px;">
+            <strong>[ZAFIYET]</strong>
+            Bu sayfaya herkes erisebilir! Admin yetkisi kontrolu YOK.
+        </div>
+
+        <div class="card">
+            <h2>Site Ayarlari</h2>
+            <form method="POST" action="/admin">
+                <div class="form-group">
+                    <label>Site Mesaji (Ana Sayfada Gorunur)</label>
+                    <input type="text" name="site_mesaji" value="{{ site_mesaji }}">
+                </div>
+                <button type="submit" class="btn">Guncelle</button>
+            </form>
+            <div class="aciklama">
+                <strong>[ZAFIYET]</strong> CSRF token kontrolu YOK. XSS de mumkun.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Kullanicilar</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Kullanici</th>
+                    <th>Sifre</th>
+                    <th>Ad Soyad</th>
+                    <th>Rol</th>
+                </tr>
+                {% for u in users %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.password }}</td>
+                    <td>{{ u.full_name }}</td>
+                    <td class="{{ 'role-admin' if u.role == 'admin' else 'role-user' }}">{{ u.role }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Hesaplar</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Kullanici ID</th>
+                    <th>Hesap No</th>
+                    <th>Bakiye</th>
+                    <th>Tur</th>
+                </tr>
+                {% for a in accounts %}
+                <tr>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.user_id }}</td>
+                    <td class="hesap-no">{{ a.account_no }}</td>
+                    <td>{{ "%.2f"|format(a.balance) }} TL</td>
+                    <td>{{ a.type }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Islem Gecmisi (Son 50)</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Gonderen</th>
+                    <th>Alici</th>
+                    <th>Tutar</th>
+                    <th>Tarih</th>
+                    <th>Aciklama</th>
+                </tr>
+                {% for t in transactions %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.from_name or '-' }}</td>
+                    <td>{{ t.to_name or '-' }}</td>
+                    <td>{{ "%.2f"|format(t.amount) }} TL</td>
+                    <td>{{ t.timestamp }}</td>
+                    <td>{{ t.description or '-' }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <footer>&copy; 2024 Kanser Bank. Egitim amaciyla hazirlanmistir.</footer>
+</body>
+</html>

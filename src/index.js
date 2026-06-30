@@ -1,4 +1,5 @@
 import { verifyDiscordSignature } from './utils/helpers.js';
+import { initDB } from './utils/db.js';
 import { handleGetRoutes } from './endpoints/getRoutes.js';
 import { handleHaberBot } from './bots/haberBot.js';
 import { handleKanserBot } from './bots/kanserBot.js';
@@ -11,10 +12,16 @@ import { handleSosyalMedyaBot } from './bots/sosyalMedyaBot.js';
 import { handleGuvenlikBot } from './bots/guvenlikBot.js';
 import { handleCografiBot } from './bots/cografiBot.js';
 import { handleCookiesBot } from './bots/cookiesBot.js';
+import { handleScheduled } from './scheduled.js';
 
 export default {
+  async scheduled(event, env, ctx) {
+    await handleScheduled(event, env, ctx);
+  },
+
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    ctx.waitUntil(initDB(env));
 
     // CORS Preflight (PDF JavaScript fetch icin)
     if (request.method === 'OPTIONS') {

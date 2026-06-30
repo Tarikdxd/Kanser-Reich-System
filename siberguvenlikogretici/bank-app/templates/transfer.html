@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanser Bank - Havale</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>KANSER <span>BANK</span></h1>
+        <nav>
+            <a href="/dashboard">Hesabim</a>
+            <a href="/transfer">Havale</a>
+            <a href="/admin">Admin</a>
+            <a href="/logout">Cikis</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div style="max-width: 600px; margin: 40px auto;">
+            <div class="card">
+                <h2>Para Havale / EFT</h2>
+                {% if hata %}
+                <div class="hata">{{ hata }}</div>
+                {% endif %}
+                <form method="POST" action="/transfer">
+                    <div class="form-group">
+                        <label>Gonderen Hesap</label>
+                        <select name="from_account">
+                            {% for a in accounts %}
+                            <option value="{{ a.account_no }}">{{ a.account_no }} - {{ "%.2f"|format(a.balance) }} TL</option>
+                            {% endfor %}
+                        </select>
+                        <div class="aciklama" style="margin-top: 10px;">
+                            <strong>[ZAFIYET]</strong>
+                            from_account alani SQL injection'a acik!<br>
+                            <code>' OR '1'='1</code> dene.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alici Hesap No</label>
+                        <input type="text" name="to_account" placeholder="TR5555555555" required>
+                        <small style="color:#8090a0;">Hedef: TR5555555555 (tarikdxd)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Tutar (TL)</label>
+                        <input type="number" name="amount" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <button type="submit" class="btn">Havale Gonder</button>
+                </form>
+            </div>
+            <div class="card" style="background: #ffaa0011; border-color: #ffaa00;">
+                <h2 style="color: #ffaa00;">Saldiri Senaryosu</h2>
+                <p style="font-size: 14px; line-height: 1.8; color: #a0b0c0;">
+                <b>1. IDOR:</b> from_account'a baskasinin hesap nosunu yaz. Ornegin:<br>
+                <code>TR1234567890</code> (Ahmet'in hesabi) — kendi hesabin degil ama sistem izin verir!<br><br>
+                <b>2. SQLi:</b> from_account'a su degeri dene:<br>
+                <code>' OR '1'='1' --</code><br>
+                Bu butun hesaplari gosterecek veya ilk hesaptan para cekecek.<br><br>
+                <b>3. UNION SQLi:</b><br>
+                <code>' UNION SELECT 1,'TR5555555555',99999,'vadesiz' --</code><br>
+                Hayali bir hesap uzerinden para transferi.
+                </p>
+            </div>
+        </div>
+    </div>
+    <footer>&copy; 2024 Kanser Bank. Egitim amaciyla hazirlanmistir.</footer>
+</body>
+</html>

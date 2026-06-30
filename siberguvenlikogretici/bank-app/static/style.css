@@ -1,0 +1,71 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0a1628, #1a2a4a);
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+header {
+    background: linear-gradient(90deg, #1a2a4a, #0d1b3e);
+    padding: 20px 40px;
+    border-bottom: 2px solid #00d4ff;
+    display: flex; justify-content: space-between; align-items: center;
+}
+header h1 { color: #00d4ff; font-size: 28px; letter-spacing: 2px; }
+header h1 span { color: #ff4444; }
+nav a {
+    color: #a0b0c0; text-decoration: none; margin-left: 20px;
+    padding: 8px 16px; border-radius: 4px; transition: 0.3s;
+}
+nav a:hover { background: #00d4ff22; color: #00d4ff; }
+.card {
+    background: #1a2a4a; border-radius: 12px; padding: 30px;
+    margin: 20px 0; border: 1px solid #2a3a5a;
+}
+.card h2 { color: #00d4ff; margin-bottom: 20px; }
+.balance {
+    font-size: 36px; font-weight: bold; color: #00ff88;
+    text-align: center; padding: 20px;
+}
+.balance-label { text-align: center; color: #8090a0; margin-top: -10px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 6px; color: #a0b0c0; }
+.form-group input, .form-group select {
+    width: 100%; padding: 12px; border: 1px solid #2a3a5a;
+    background: #0d1b3e; color: #e0e0e0; border-radius: 6px;
+    font-size: 16px;
+}
+.btn {
+    background: #00d4ff; color: #0a1628; padding: 12px 24px;
+    border: none; border-radius: 6px; font-size: 16px;
+    font-weight: bold; cursor: pointer; transition: 0.3s;
+}
+.btn:hover { background: #00a8cc; }
+.btn-danger { background: #ff4444; }
+.btn-danger:hover { background: #cc0000; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #2a3a5a; }
+th { color: #00d4ff; font-size: 14px; text-transform: uppercase; }
+tr:hover { background: #0d1b3e; }
+.positive { color: #00ff88; }
+.negative { color: #ff4444; }
+.hata {
+    background: #ff444422; border: 1px solid #ff4444;
+    color: #ff6666; padding: 10px; border-radius: 6px; margin: 10px 0;
+}
+.basarili {
+    background: #00ff8822; border: 1px solid #00ff88;
+    color: #00ff88; padding: 10px; border-radius: 6px; margin: 10px 0;
+}
+.hesap-no { font-family: monospace; font-size: 18px; color: #00d4ff; }
+.role-admin { color: #ff4444; font-weight: bold; }
+.role-user { color: #a0b0c0; }
+.site-mesaji {
+    background: #0d1b3e; padding: 15px; border-radius: 8px;
+    margin: 20px 0; text-align: center; font-size: 18px;
+    color: #00d4ff; border: 1px solid #00d4ff44;
+}
+.aciklama { background: #ffaa0011; border-left: 4px solid #ffaa00; padding: 15px; margin: 10px 0; border-radius: 4px; }
+.aciklama strong { color: #ffaa00; }
+footer { text-align: center; padding: 20px; color: #405060; font-size: 12px; }

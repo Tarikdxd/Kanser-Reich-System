@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanser Bank - Hesap Detayi</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>KANSER <span>BANK</span></h1>
+        <nav>
+            <a href="/dashboard">Hesabim</a>
+            <a href="/transfer">Havale</a>
+            <a href="/admin">Admin</a>
+            <a href="/logout">Cikis</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="aciklama" style="margin-top: 20px;">
+            <strong>[ZAFIYET]</strong>
+            IDOR (Insecure Direct Object Reference) — Bu hesap size ait olmasa da gorebiliyorsunuz!
+            <br><code>/account/1</code> = Admin, <code>/account/2</code> = Ahmet, <code>/account/5</code> = Zeynep
+        </div>
+
+        <div class="card">
+            <h2>Hesap Bilgileri</h2>
+            <table>
+                <tr><td><b>Hesap No</b></td><td class="hesap-no">{{ account.account_no }}</td></tr>
+                <tr><td><b>Sahibi</b></td><td>{{ user.full_name }} ({{ user.username }})</td></tr>
+                <tr><td><b>E-posta</b></td><td>{{ user.email or 'Yok' }}</td></tr>
+                <tr><td><b>Rol</b></td><td class="{{ 'role-admin' if user.role == 'admin' else 'role-user' }}">{{ user.role }}</td></tr>
+                <tr><td><b>Bakiye</b></td><td class="positive">{{ "%.2f"|format(account.balance) }} TL</td></tr>
+                <tr><td><b>Hesap Turu</b></td><td>{{ account.type }}</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Islem Gecmisi</h2>
+            <table>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Gonderen</th>
+                    <th>Alici</th>
+                    <th>Tutar</th>
+                </tr>
+                {% for t in transactions %}
+                <tr>
+                    <td>{{ t.timestamp[:10] }}</td>
+                    <td>{{ t.from_name or '-' }}</td>
+                    <td>{{ t.to_name or '-' }}</td>
+                    <td class="{{ 'positive' if t.to_id == user.id else 'negative' }}">
+                        {% if t.to_id == user.id %}+{% else %}-{% endif %}{{ "%.2f"|format(t.amount) }} TL
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" style="text-align:center; color:#8090a0;">Islem yok</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <footer>&copy; 2024 Kanser Bank. Egitim amaciyla hazirlanmistir.</footer>
+</body>
+</html>

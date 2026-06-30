@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanser Bank - Hesabim</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>KANSER <span>BANK</span></h1>
+        <nav>
+            <a href="/dashboard">Hesabim</a>
+            <a href="/transfer">Havale</a>
+            <a href="/admin">Admin</a>
+            <a href="/logout">Cikis</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div style="display: flex; gap: 20px; margin-top: 20px;">
+            <div style="flex: 2;">
+                <div class="card">
+                    <h2>Hosgeldin, {{ user.full_name }}</h2>
+                    <div class="aciklama">
+                        <strong>[BILGI]</strong>
+                        Kullanici: <b>{{ user.username }}</b> |
+                        Rol: <b>{{ user.role }}</b> |
+                        ID: <b>{{ user.id }}</b>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="balance-label">Hesap Bakiyesi</div>
+                        <div class="balance">{{ "%.2f"|format(account.balance) }} TL</div>
+                        <div style="text-align: center; color: #8090a0;">
+                            Hesap No: <span class="hesap-no">{{ account.account_no }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Son Islemler</h2>
+                    <table>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Kimden</th>
+                            <th>Kime</th>
+                            <th>Tutar</th>
+                            <th>Aciklama</th>
+                        </tr>
+                        {% for t in transactions %}
+                        <tr>
+                            <td>{{ t.timestamp[:10] }}</td>
+                            <td>{{ t.from_name or '-' }}</td>
+                            <td>{{ t.to_name or '-' }}</td>
+                            <td class="{{ 'positive' if t.to_id == user.id else 'negative' }}">
+                                {% if t.to_id == user.id %}+{% else %}-{% endif %}
+                                {{ "%.2f"|format(t.amount) }} TL
+                            </td>
+                            <td>{{ t.description or '-' }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5" style="text-align:center; color:#8090a0;">Henuz islem yok</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <div style="flex: 1;">
+                <div class="card">
+                    <h2>Hizli Havale</h2>
+                    <a href="/transfer" class="btn" style="width:100%; text-align:center; display:block;">Havale Yap</a>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <h2>Profil Bilgileri</h2>
+                    <p><b>Ad:</b> {{ user.full_name }}</p>
+                    <p><b>E-posta:</b> {{ user.email or 'Belirtilmemis' }}</p>
+                    <p><b>Hesap Turu:</b> {{ account.type }}</p>
+                </div>
+                <div class="card" style="margin-top: 20px; background: #ffaa0011; border-color: #ffaa00;">
+                    <h2 style="color: #ffaa00;">Saldiri Vektoru</h2>
+                    <p style="font-size: 13px; color: #a0b0c0;">
+                        URL'de hesap ID'sini degistirmeyi dene:<br>
+                        <code>/account/1</code> - Admin hesabi<br>
+                        <code>/account/2</code> - Ahmet'in hesabi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>&copy; 2024 Kanser Bank. Egitim amaciyla hazirlanmistir.</footer>
+</body>
+</html>
