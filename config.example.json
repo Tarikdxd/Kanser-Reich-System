@@ -1,0 +1,14 @@
+{
+  "discordToken": "BOT_TOKEN_HERE",
+  "applicationId": "YOUR_APPLICATION_ID",
+  "guildIds": [
+    "GUILD_ID_1",
+    "GUILD_ID_2"
+  ],
+  "testGuildId": "GUILD_ID",
+  "testChannelId": "CHANNEL_ID",
+  "testReactions": [
+    "custom:EMOJI_ID_1",
+    "custom:EMOJI_ID_2"
+  ]
+}

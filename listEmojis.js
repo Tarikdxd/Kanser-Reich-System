@@ -1,15 +1,14 @@
-const token = process.env.DISCORD_TOKEN;
-const guildId = "1442997310735913053"; // Sunucu ID'si
+const config = require('./config.json');
 
 async function listEmojis() {
-  const url = `https://discord.com/api/v10/guilds/${guildId}/emojis`;
-  const res = await fetch(url, { headers: { 'Authorization': `Bot ${token}` } });
-  
+  const url = `https://discord.com/api/v10/guilds/${config.testGuildId}/emojis`;
+  const res = await fetch(url, { headers: { 'Authorization': `Bot ${config.discordToken}` } });
+
   if (!res.ok) {
     console.log("Sunucu emojileri alinamadi:", await res.text());
     return;
   }
-  
+
   const emojis = await res.json();
   console.log("Sunucudaki ozel emojiler:");
   emojis.forEach(e => {

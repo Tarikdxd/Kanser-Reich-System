@@ -1,27 +1,21 @@
-const token = process.env.DISCORD_TOKEN;
-const applicationId = "1045787629028909106";
-
-const guildIds = [
-  "750127541116993536", 
-  "1442997310735913053" 
-];
+const config = require('./config.json');
 
 async function clearGuildCommands() {
-  for (const guildId of guildIds) {
-    const url = `https://discord.com/api/v10/applications/${applicationId}/guilds/${guildId}/commands`;
-    
+  for (const guildId of config.guildIds) {
+    const url = `https://discord.com/api/v10/applications/${config.applicationId}/guilds/${guildId}/commands`;
+
     try {
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bot ${token}`
+          'Authorization': `Bot ${config.discordToken}`
         },
-        body: JSON.stringify([]) // Bos array gondererek sunucuya ozel komutlari siliyoruz
+        body: JSON.stringify([])
       });
-      
+
       if (response.ok) {
-        console.log(`Sunucu (${guildId}) yerel komutlari temizlendi. Artik sadece Global komut gorunecek.`);
+        console.log(`Sunucu (${guildId}) yerel komutlari temizlendi.`);
       }
     } catch (err) {
       console.error(err);
